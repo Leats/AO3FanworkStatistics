@@ -1,0 +1,87 @@
+[
+  {
+    "categorie": "Adaar",
+    "values": [
+      {
+        "value": 1026,
+        "rate": "Female"
+      },
+      {
+        "value": 505,
+        "rate": "Male"
+      },
+      {
+        "value": 173,
+        "rate": "Not specified"
+      }
+    ]
+  },
+  {
+    "categorie": "Cadash",
+    "values": [
+      {
+        "value": 520,
+        "rate": "Female"
+      },
+      {
+        "value": 130,
+        "rate": "Male"
+      },
+      {
+        "value": 74,
+        "rate": "Not specified"
+      }
+    ]
+  },
+  {
+    "categorie": "Lavellan",
+    "values": [
+      {
+        "value": 6430,
+        "rate": "Female"
+      },
+      {
+        "value": 1947,
+        "rate": "Male"
+      },
+      {
+        "value": 1567,
+        "rate": "Not specified"
+      }
+    ]
+  },
+  {
+    "categorie": "Trevelyan",
+    "values": [
+      {
+        "value": 4118,
+        "rate": "Female"
+      },
+      {
+        "value": 1470,
+        "rate": "Male"
+      },
+      {
+        "value": 475,
+        "rate": "Not specified"
+      }
+    ]
+  },
+  {
+    "categorie": "No Specified Race",
+    "values": [
+      {
+        "value": 5631,
+        "rate": "Female"
+      },
+      {
+        "value": 1773,
+        "rate": "Male"
+      },
+      {
+        "value": 1262,
+        "rate": "Not specified"
+      }
+    ]
+  }
+]

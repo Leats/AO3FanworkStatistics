@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<!--<link href="style.css" rel="stylesheet">-->
+	<style>
+		#toc_container {
+			background: #f9f9f9 none repeat scroll 0 0;
+			border: 1px solid #aaa;
+			display: table;
+			font-size: 95%;
+			margin-bottom: 1em;
+			padding: 20px;
+			width: auto;
+			line-height: 1.5;
+		}
+
+		#toc_container li,
+		#toc_container ul,
+		#toc_container ul li {
+			list-style: outside none none !important;
+		}
+
+		body {
+			font: 13px sans-serif;
+			color: #141414;
+			background-color: rgb(20, 20, 20);
+		}
+
+		.header {
+			font: 18px sans-serif;
+			height: 70px;
+			background: rgb(34, 34, 34);
+			text-align: center;
+		}
+
+		.graphs {
+			font-size: 11px;
+			background-color: #f9f9f9;
+			border: 1px solid #aaa;
+		}
+
+		.footer {
+			background: rgb(150, 150, 150);
+			text-align: left;
+			padding: 10px;
+		}
+
+		.content {
+			padding: 15px;
+			text-align: justify;
+		}
+
+		.wrapper {
+			width: 1320px;
+			margin: 0 auto;
+			background-color: rgb(228, 226, 226);
+		}
+
+		.axis path,
+		.axis line {
+			fill: none;
+			stroke: #000;
+			shape-rendering: crispEdges;
+		}
+
+		a {
+			color: #D96412;
+		}
+
+		a:hover {
+			color: #33696E;
+		}
+
+		.x.axis path {
+			display: none;
+		}
+
+		.line {
+			fill: none;
+			stroke: #33696E;
+			stroke-width: 1.5px;
+			z-index: 10;
+		}
+
+		.overlay {
+			fill: none;
+			pointer-events: all;
+		}
+
+		.focus circle {
+			fill: none;
+			stroke: steelblue;
+		}
+
+		.bar {
+			fill: rgb(68, 127, 133);
+		}
+
+		.bar:hover {
+			fill: #D96412;
+		}
+
+		.d3-tip {
+			line-height: 1;
+			font-weight: bold;
+			padding: 12px;
+			background: rgba(0, 0, 0, 0.8);
+			color: #fff;
+			border-radius: 2px;
+			text-align: center;
+		}
+
+		/* Creates a small triangle extender for the tooltip */
+		.d3-tip:after {
+			box-sizing: border-box;
+			display: inline;
+			font-size: 10px;
+			width: 100%;
+			line-height: 1;
+			color: rgba(0, 0, 0, 0.8);
+			content: "\25BC";
+			position: absolute;
+			text-align: center;
+		}
+
+		/* Style northward tooltips differently */
+		.d3-tip.n:after {
+			margin: -1px 0 0 0;
+			top: 100%;
+			left: 0;
+		}
+
+		p {
+			width: 1000px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+
+		<header class="header">
+		</header>
+
+		<main class="content">
+			<h1>Statistics about Dragon Age on AO3</h1>
+			<p>The <a href="https://archiveofourown.org/">"Archive of Our Own" (AO3)</a>, a nonprofit open source repository for
+				fanworks, has become one of the most popular archives for transformative works since its founding in 2008.</p>
+			<p>On this page I have collected several statistics about the fanfictions of the Dragon Age Universe <a href="#dafandom">[1]</a>.This
+				was achieved by going through the tag <a href="https://archiveofourown.org/tags/Dragon%20Age%20-%20All%20Media%20Types/works">"Dragon
+					Age - All Media Types"</a> on
+				AO3. This means that any work not tagged with this was not considered.</p>
+
+			<div id="toc_container">
+				<!--<p class="toc_title">Contents</p>--><strong>Contents</strong>
+				<ul class="toc_list">
+					<li><a href="#TimeOfUpdate">1 Time of update</a></li>
+					<li><a href="#Characters">2 Characters</a>
+						<ul>
+							<li><a href="#PopularCharacters">2.1 Most popular Characters</a></li>
+							<li><a href="#MainCharacters">2.2 Types of Main Characters</a></li>
+							<li><a href="#First_Sub_Point_2">2.3 Ships</a></li>
+						</ul>
+					</li>
+					<li><a href="#Tags">3 Tags</a></li>
+					<li><a href="#Ratings">4 Ratings</a>
+					<li><a href="#LengthAndChapters">5 Length and chapters</a></li>
+					</li>
+					<li><a href="#footnotes">6 Footnotes</a></li>
+				</ul>
+			</div>
+			<h2 id="TimeOfUpdate">The time of update</h2>
+			<p>
+				Every work on AO3 has a date which describes when the fanfiction was updated last. For single-chapter stories this
+				is usually the same as the post date. Not all works posted are finished but the update date gives a good estimate
+				of
+				how popular the fandom is depending on how many works were updated in one day. The following graph shows these
+				dates from the first update to the last (Last update: Oct 12 2018). If you hover over the grey lines you can see
+				which game got published at that time to give you more context about the dates.<br>
+				<i>Note: All release dates are the US release dates.</i></p>
+			<div class="graphs" id="timegraph">
+			</div>
+			<h2 id="Characters">Characters</h2>
+			<p>AO3 allows the authors to tag the characters which appear in their story. They can use what ever tag they like,
+				but
+				the most popular characters usually get suggested once the author starts typing to prevent users from creating
+				several tags for one and the same character. This does not always work, however. A popular example are the tags for
+				Solas from Dragon Age: Inquisition. For him the following tags exist (sorted by popularity with the most popular
+				one
+				coming first): "Solas", "Solas (Dragon Age)", "Fen'Harel | Solas" plus an additional set of tags specifying how
+				Solas behaves in the certain work (for example "dark!Solas").<br>
+				There are authors who will just use one of those tags, while other authors might use more than one tag for the
+				character. Due to that the amount a tag is used does not necessarily equal the amount of fanfictions written about
+				that character. But it does give an estimate for popularity of a character.</p>
+			<h3 id="PopularCharacters">Most popular Characters</h3>
+			<p>
+				In the following graph the character tags used the most are pictured.
+			</p>
+			<div class="graphs" id="chargraph">
+			</div>
+			<h3 id="MainCharacters">Types of main character</h3>
+			<p>
+				In Dragon Age: Inquisition the player can choose from four different races for the main character ("The
+				Inquisitor").These are human (last name <strong>Trevelyan</strong>), elf (last name <strong>Lavellan</strong>),
+				dwarf (last name <strong>Cadash</strong>)
+				and qunari (last name <strong>Adaar</strong>)<a href="#qunari">[2]</a>. In the following graph I chose the most
+				popular set of tags to estimate how many fanfictions there are with the specific races. However, since there are
+				some fanfictions who do use more than one Inquisitor tag these are only estimates. Also, there were over 50
+				different tags for Inquisitors, ranging from only "Inquisitor" up to combinations for gender, race and class. In
+				addition many authors did use the specific first name of the inquisitor, which can be chosen freely.<br>
+				The tags which were chosen to represent were:<br>
+				<pre>
+			Female [last name], Male [last name], [last name]
+			Female Inquisitor (Dragon Age), Male Inquisitor (Dragon Age), Inquisitor (Dragon Age)</pre>
+			</p>
+			<div class="graphs" id="mainchargraph">
+			</div>
+			<h3 id="Ships">Most popular ship tags</h3>
+			<p>
+				In addition to characters AO3 also lets the author tag relationships (usually just called "ships") which appear in
+				their story. These are usually
+				in the format "[first character] / [second character]". While most tagged relationships are of romantic or sexual
+				nature it is also possible to tag friendships, which is usually done in the format "[first character] & [second
+				character]". In the following graph the most popular ship tags are shown.
+			</p>
+			<div class="graphs" id="shipgraph">
+			</div>
+			<h2 id="Tags">Tags</h2>
+			<p>
+				To be added</p>
+			<div class="graphs" id="taggraph">
+			</div>
+			<h2 id="Ratings">Ratings</h2>
+			<p>
+				The author can choose one of several ratings depending on the content of their work. The following graph shows the
+				distribution of these ratings.
+			</p>
+			<div class="graphs" id="ratingsgraph">
+			</div>
+			<h2 id="LengthAndChapters">Length and chapters</h2>
+			<p>
+				AO3 gives the authors the ability to upload their works in chapters. While many users use this function there are a
+				number of authors who upload their whole work in one chapter. While the shorted uploaded work has 0 words, the
+				longest one has currently 996166 words (12 Oct 2018). A lot of works with 0 words are not written ones but instead
+				contain fanart which is not counted in the word count. In addition to this works can also be marked as "completed",
+				signaling the user that the story is completely finished.<br>
+				Looking at the distribution of work length one sees that a large percentage of works has a word count of 90000 and
+				under (~98.1%). Due to that I will only work with these in the following.
+				For the graph I sorted the works under 90000 words into 50 equally sized bins.
+				The dots do show how many chapters the works in these buckets have in average. By clicking on the button the dots
+				change to display how many of these works are marked as "completed". Hovering over the dots at any time shows a
+				tooltip with the statistics for each bin.
+			</p>
+			<div class="graphs" id="lengthgraph">
+			</div>
+
+
+		</main>
+
+		<footer class="footer">
+			<strong>Footnotes:</strong><br>
+			<p id="dafandom">[1] This does contain all media, which is set in the Dragon Age Universe. While it is mostly about
+				the three primary games, also books, comics and movies are part of it. For a full list of media see <a href="https://en.wikipedia.org/wiki/Dragon_Age">wikipedia's
+					entry on this.</a></p>
+			<p id="qunari">[2] Qunari are a fictional race of tall people with horns, who have usually grey-ish skin. They are
+				unique to the Dragon Age Universe. Technically,
+				it is not the race that is called Qunari but the "religion" they have. There is no true name for the race itself,
+				but most often if someone says Qunari they do mean the race, nevertheless.</a></p>
+		</footer>
+
+	</div>
+	<script src="//d3js.org/d3.v3.min.js"></script>
+	<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+	<script src="timegraph.js"></script>
+	<script src="charchart.js"></script>
+	<script src="mainchars.js"></script>
+	<script src="shipchart.js"></script>
+	<script src="ratingschart.js"></script>
+	<script src="lengthandchapters.js"></script>
+</body>
+
+</html>
