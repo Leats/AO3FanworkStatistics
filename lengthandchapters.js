@@ -138,6 +138,7 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
     .attr("dy", ".71em")
     .style("text-anchor", "end")
     .style("font-weight", "bold")
+    .style("fill", "#447f85")
     .text("Works");
 
   svg6
@@ -153,6 +154,7 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
     .attr("dy", ".71em")
     .style("text-anchor", "end")
     .style("font-weight", "bold")
+    .style("fill", "#D96412")
     .attr("id", "yAxistitle")
     .text("ø chapters");
 
