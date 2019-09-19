@@ -3,15 +3,15 @@
     "categorie": "Adaar",
     "values": [
       {
-        "value": 1026,
+        "value": 1014,
         "rate": "Female"
       },
       {
-        "value": 505,
+        "value": 493,
         "rate": "Male"
       },
       {
-        "value": 173,
+        "value": 192,
         "rate": "Not specified"
       }
     ]
@@ -20,15 +20,15 @@
     "categorie": "Cadash",
     "values": [
       {
-        "value": 520,
+        "value": 514,
         "rate": "Female"
       },
       {
-        "value": 130,
+        "value": 129,
         "rate": "Male"
       },
       {
-        "value": 74,
+        "value": 77,
         "rate": "Not specified"
       }
     ]
@@ -37,15 +37,15 @@
     "categorie": "Lavellan",
     "values": [
       {
-        "value": 6430,
+        "value": 6344,
         "rate": "Female"
       },
       {
-        "value": 1947,
+        "value": 2006,
         "rate": "Male"
       },
       {
-        "value": 1567,
+        "value": 1559,
         "rate": "Not specified"
       }
     ]
@@ -54,11 +54,11 @@
     "categorie": "Trevelyan",
     "values": [
       {
-        "value": 4118,
+        "value": 4057,
         "rate": "Female"
       },
       {
-        "value": 1470,
+        "value": 1520,
         "rate": "Male"
       },
       {
@@ -71,15 +71,15 @@
     "categorie": "No Specified Race",
     "values": [
       {
-        "value": 5631,
+        "value": 6315,
         "rate": "Female"
       },
       {
-        "value": 1773,
+        "value": 2086,
         "rate": "Male"
       },
       {
-        "value": 1262,
+        "value": 1417,
         "rate": "Not specified"
       }
     ]

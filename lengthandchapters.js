@@ -8,8 +8,10 @@ const percentformatter = d3.format(".1%");
 
 let currentYAxis = "chapters";
 
+// Amount of bins used
 const binamount = 50;
 
+// The largest wordcount considered
 const largestwork = 90000;
 
 var x6 = d3.scale.linear().range([0, width6], 0.05);
@@ -133,12 +135,12 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
     .attr("class", "y axis")
     .call(yAxis6)
     .append("text")
-    .attr("y", -6)
+    .attr("y", -12)
     .attr("x", -7)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
     .style("font-weight", "bold")
-    .style("fill", "#447f85")
+    .style("fill", "#98065e")
     .text("Works");
 
   svg6
@@ -149,12 +151,12 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
     .call(yAxis26)
     .append("text")
     //.attr("transform", "rotate(-90)")
-    .attr("y", -6)
+    .attr("y", -12)
     .attr("x", +60)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
     .style("font-weight", "bold")
-    .style("fill", "#D96412")
+    .style("fill", "#f56735")
     .attr("id", "yAxistitle")
     .text("ø chapters");
 
@@ -164,8 +166,8 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
     .attr("width", "300")
     .attr("x", width6 - 708)
     .attr("y", -8)
-    .style("fill", "#FEEB97")
-    .style("stroke", "#D96412")
+    .style("fill", "#f0f0f0")
+    .style("stroke", "#f56735")
     .style("stroke-width", "2px");
 
   svg6
@@ -174,7 +176,7 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
     .attr("dx", width6 - 700)
     .attr("dy", ".35em")
     .style("font-weight", "bold")
-    .style("fill", "#D96412")
+    .style("fill", "#f56735")
     .style("font-size", "13px")
     .style("text-decoration", "underline")
     .text("Toggle between chapters and completion rate")
@@ -182,7 +184,7 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
       d3.select(this).style("fill", "#b54c03");
     })
     .on("mouseout", function(d) {
-      d3.select(this).style("fill", "#D96412");
+      d3.select(this).style("fill", "#f56735");
     })
     .on("click", function(d) {
       updateData();
@@ -193,7 +195,7 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
     .data(histdata)
     .enter()
     .append("rect")
-    .style("fill", "#447f85")
+    .style("fill", "#98065e")
     .attr("x", function(d) {
       return x6(histdata.indexOf(d)) + 1;
     })
@@ -223,13 +225,13 @@ d3.csv("dragonageworklengths.csv", function(error, data6) {
     .attr("cy", function(d) {
       return y26(d.chapters);
     })
-    .style("fill", "#D96412")
+    .style("fill", "#f56735")
     .on("mouseover", function(d) {
-      d3.select(this).style("fill", "#FEEB97");
+      d3.select(this).style("fill", "#ffa600");
       tip6.show(d);
     })
     .on("mouseout", function(d) {
-      d3.select(this).style("fill", "#D96412");
+      d3.select(this).style("fill", "#f56735");
       tip6.hide();
     });
 

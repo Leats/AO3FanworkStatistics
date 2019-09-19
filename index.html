@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8" />
-	<title></title>
-	<!--<link href="style.css" rel="stylesheet">-->
 	<style>
 		#toc_container {
-			background: #f9f9f9 none repeat scroll 0 0;
+			background: #ffffff none repeat scroll 0 0;
 			border: 1px solid #aaa;
 			display: table;
 			font-size: 95%;
+			padding: 10px;
+			margin-left:250px;
 			margin-bottom: 1em;
-			padding: 20px;
+			margin-top: 1em;
 			width: auto;
 			line-height: 1.5;
+			text-align: left;
 		}
 
 		#toc_container li,
@@ -24,16 +24,19 @@
 		}
 
 		body {
-			font: 13px sans-serif;
+			font: 15px sans-serif;
 			color: #141414;
-			background-color: rgb(20, 20, 20);
+			background-color: #ffffff;
+			line-height: 1.5;
 		}
 
 		.header {
 			font: 18px sans-serif;
-			height: 70px;
-			background: rgb(34, 34, 34);
+			height: 100px;
+			background: rgb(224, 224, 224);
 			text-align: center;
+			padding: 10px;
+			vertical-align: middle;
 		}
 
 		.graphs {
@@ -43,20 +46,20 @@
 		}
 
 		.footer {
-			background: rgb(150, 150, 150);
+			background: rgb(224, 224, 224);
 			text-align: left;
 			padding: 10px;
 		}
 
 		.content {
 			padding: 15px;
-			text-align: justify;
+			text-align: center;
 		}
 
 		.wrapper {
 			width: 1320px;
 			margin: 0 auto;
-			background-color: rgb(228, 226, 226);
+			background-color: rgb(255, 255, 255);
 		}
 
 		.axis path,
@@ -67,11 +70,11 @@
 		}
 
 		a {
-			color: #D96412;
+			color: #98065e;
 		}
 
 		a:hover {
-			color: #33696E;
+			color: #f56735;
 		}
 
 		.x.axis path {
@@ -80,7 +83,7 @@
 
 		.line {
 			fill: none;
-			stroke: #33696E;
+			stroke: #98065e;
 			stroke-width: 1.5px;
 			z-index: 10;
 		}
@@ -92,15 +95,15 @@
 
 		.focus circle {
 			fill: none;
-			stroke: steelblue;
+			stroke: #f38181;
 		}
 
 		.bar {
-			fill: rgb(68, 127, 133);
+			fill: #98065e;
 		}
 
 		.bar:hover {
-			fill: #D96412;
+			fill: #d12e50;
 		}
 
 		.d3-tip {
@@ -134,7 +137,8 @@
 		}
 
 		p {
-			width: 1000px;
+			width: 900px;
+			margin: auto;
 		}
 	</style>
 </head>
@@ -143,21 +147,21 @@
 	<div class="wrapper">
 
 		<header class="header">
+				<h1>Statistics about Dragon Age on AO3</h1>
 		</header>
 
 		<main class="content">
-			<h1>Statistics about Dragon Age on AO3</h1>
 			<p>The <a href="https://archiveofourown.org/">"Archive of Our Own" (AO3)</a>, a nonprofit open source repository for
-				fanworks, has become one of the most popular archives for transformative works since its founding in 2008.</p>
-			<p>On this page I have collected several statistics about the fanfictions of the Dragon Age Universe <a href="#dafandom">[1]</a>.This
+				fanworks, has become one of the most popular archives for transformative works since its founding in 2008. On this page I have collected several statistics about the fanfictions of the Dragon Age Universe <a href="#dafandom">[1]</a>.This
 				was achieved by going through the tag <a href="https://archiveofourown.org/tags/Dragon%20Age%20-%20All%20Media%20Types/works">"Dragon
 					Age - All Media Types"</a> on
 				AO3. This means that any work not tagged with this was not considered.</p>
+				<i>Last updated on September 19, 2019 2pm MEST</i>
 
 			<div id="toc_container">
 				<!--<p class="toc_title">Contents</p>--><strong>Contents</strong>
 				<ul class="toc_list">
-					<li><a href="#TimeOfUpdate">1 Time of update</a></li>
+					<li><a href="#TimeOfUpdate">1 Publishing dates</a></li>
 					<li><a href="#Characters">2 Characters</a>
 						<ul>
 							<li><a href="#PopularCharacters">2.1 Most popular Characters</a></li>
@@ -165,22 +169,21 @@
 							<li><a href="#First_Sub_Point_2">2.3 Ships</a></li>
 						</ul>
 					</li>
-					<li><a href="#Tags">3 Tags</a></li>
-					<li><a href="#Ratings">4 Ratings</a>
-					<li><a href="#LengthAndChapters">5 Length and chapters</a></li>
+					<li><a href="#Ratings">3 Ratings</a>
+					<li><a href="#LengthAndChapters">4 Length and chapters</a></li>
 					</li>
-					<li><a href="#footnotes">6 Footnotes</a></li>
+					<li><a href="#footnotes">5 Footnotes</a></li>
 				</ul>
 			</div>
-			<h2 id="TimeOfUpdate">The time of update</h2>
+			<h2 id="TimeOfUpdate">Publishing dates</h2>
 			<p>
-				Every work on AO3 has a date which describes when the fanfiction was updated last. For single-chapter stories this
-				is usually the same as the post date. Not all works posted are finished but the update date gives a good estimate
-				of
-				how popular the fandom is depending on how many works were updated in one day. The following graph shows these
-				dates from the first update to the last (Last update: Oct 12 2018). If you hover over the grey lines you can see
-				which game got published at that time to give you more context about the dates.<br>
+				Every work on AO3 has a date which describes when the fanfiction was last updated. For single-chapter stories this
+				is usually the same as the post date. For multi-chapter fanfictions the date shows the publishing date of the last chapter.
+				The following graph shows only the dates of <b>completed</b> fanworks, meaning that not yet completed fanworks were
+				ignored. If you hover over the grey lines you can see
+				which event happened at that time to give you more context.<br>
 				<i>Note: All release dates are the US release dates.</i></p>
+
 			<div class="graphs" id="timegraph">
 			</div>
 			<h2 id="Characters">Characters</h2>
@@ -197,14 +200,15 @@
 				that character. But it does give an estimate for popularity of a character.</p>
 			<h3 id="PopularCharacters">Most popular Characters</h3>
 			<p>
-				In the following graph the character tags used the most are pictured.
+				In the following graph the character tags used the most are pictured, starting with the most popular on the left.
+				The view is limited to the top 20. However, all in all there were more than 14000 individual character tags available.
 			</p>
 			<div class="graphs" id="chargraph">
 			</div>
-			<h3 id="MainCharacters">Types of main character</h3>
+			<h3 id="MainCharacters">Types of main character in Dragon Age: Inquisition</h3>
 			<p>
 				In Dragon Age: Inquisition the player can choose from four different races for the main character ("The
-				Inquisitor").These are human (last name <strong>Trevelyan</strong>), elf (last name <strong>Lavellan</strong>),
+				Inquisitor"). These are human (last name <strong>Trevelyan</strong>), elf (last name <strong>Lavellan</strong>),
 				dwarf (last name <strong>Cadash</strong>)
 				and qunari (last name <strong>Adaar</strong>)<a href="#qunari">[2]</a>. In the following graph I chose the most
 				popular set of tags to estimate how many fanfictions there are with the specific races. However, since there are
@@ -212,12 +216,17 @@
 				different tags for Inquisitors, ranging from only "Inquisitor" up to combinations for gender, race and class. In
 				addition many authors did use the specific first name of the inquisitor, which can be chosen freely.<br>
 				The tags which were chosen to represent were:<br>
-				<pre>
-			Female [last name], Male [last name], [last name]
-			Female Inquisitor (Dragon Age), Male Inquisitor (Dragon Age), Inquisitor (Dragon Age)</pre>
 			</p>
+			<pre>
+Female [last name], Male [last name], [last name]
+Female Inquisitor (Dragon Age), Male Inquisitor (Dragon Age), Inquisitor (Dragon Age)</pre>
 			<div class="graphs" id="mainchargraph">
 			</div>
+			<p><i>Note: Nonbinary/Genderqueer/Agender tags were not included in this graph. While the "Nonbinary Inquisitor" tags exist, 
+					they are not used in a capacity that would make them particularly visible in the graphic.
+					For completion purposes their numbers will be added here:<br>
+					Nonbinary Inquisitor (Dragon Age): 21, Nonbinary Lavellan: 12, Nonbinary Adaar: 6, Nonbinary Trevelyan: 2, Nonbinary Cadash: 0
+				</i></p>
 			<h3 id="Ships">Most popular ship tags</h3>
 			<p>
 				In addition to characters AO3 also lets the author tag relationships (usually just called "ships") which appear in
@@ -227,11 +236,6 @@
 				character]". In the following graph the most popular ship tags are shown.
 			</p>
 			<div class="graphs" id="shipgraph">
-			</div>
-			<h2 id="Tags">Tags</h2>
-			<p>
-				To be added</p>
-			<div class="graphs" id="taggraph">
 			</div>
 			<h2 id="Ratings">Ratings</h2>
 			<p>
@@ -244,7 +248,7 @@
 			<p>
 				AO3 gives the authors the ability to upload their works in chapters. While many users use this function there are a
 				number of authors who upload their whole work in one chapter. While the shorted uploaded work has 0 words, the
-				longest one has currently 996166 words (12 Oct 2018). A lot of works with 0 words are not written ones but instead
+				longest one has currently 996176 words (19 Sep 2019). A lot of works with 0 words are not written ones but instead
 				contain fanart which is not counted in the word count. In addition to this works can also be marked as "completed",
 				signaling the user that the story is completely finished.<br>
 				Looking at the distribution of work length one sees that a large percentage of works has a word count of 90000 and

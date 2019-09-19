@@ -69,7 +69,7 @@ d3.csv("dragonageships.csv", function(error, data4) {
     .attr("class", "y axis")
     .call(yAxis4)
     .append("text")
-    .attr("y", -6)
+    .attr("y", -10)
     .attr("x", -7)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
