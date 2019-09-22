@@ -1,25 +1,25 @@
-var margin4 = { top: 30, right: 20, bottom: 80, left: 60 },
-  width4 = 1270 - margin4.left - margin4.right,
-  height4 = 350 - margin4.top - margin4.bottom;
+var margin2 = { top: 30, right: 20, bottom: 80, left: 60 },
+  width2 = 1270 - margin2.left - margin2.right,
+  height2 = 350 - margin2.top - margin2.bottom;
 
-var amountofships = 20;
+var amountofchars = 20;
 
-var x4 = d3.scale.ordinal().rangeRoundBands([0, width4], 0.05);
+var x2 = d3.scale.ordinal().rangeRoundBands([0, width2], 0.05);
 
-var y4 = d3.scale.linear().range([height4, 0]);
+var y2 = d3.scale.linear().range([height2, 0]);
 
-var xAxis4 = d3.svg
+var xAxis2 = d3.svg
   .axis()
-  .scale(x4)
+  .scale(x2)
   .orient("bottom");
 
-var yAxis4 = d3.svg
+var yAxis2 = d3.svg
   .axis()
-  .scale(y4)
+  .scale(y2)
   .orient("left")
   .ticks(10);
 
-var tip4 = d3
+var tip = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
@@ -27,75 +27,74 @@ var tip4 = d3
     return d.value + " works";
   });
 
-var svg4 = d3
-  .select("#shipgraph")
+var svg2 = d3
+  .select("#chargraph")
   .append("svg")
-  .attr("width", width4 + margin4.left + margin4.right)
-  .attr("height", height4 + margin4.top + margin4.bottom)
+  .attr("width", width2 + margin2.left + margin2.right)
+  .attr("height", height2 + margin2.top + margin2.bottom)
   .append("g")
-  .attr("transform", "translate(" + margin4.left + "," + margin4.top + ")");
+  .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
-svg4.call(tip4);
+svg2.call(tip);
 
-d3.csv("dragonageships.csv", function(error, data4) {
-  data4 = data4.slice(0, amountofships);
+d3.csv("../data/dragonagechars.csv", function(error, data2) {
+  data2 = data2.slice(0, amountofchars);
 
-  data4.forEach(function(d) {
+  data2.forEach(function(d) {
     d.value = +d.value;
   });
 
-  x4.domain(
-    data4.map(function(d) {
+  x2.domain(
+    data2.map(function(d) {
       return d.key;
     })
   );
-  y4.domain([
+  y2.domain([
     0,
-    d3.max(data4, function(d) {
+    d3.max(data2, function(d) {
       return d.value;
     })
   ]);
 
-  svg4
+  svg2
     .append("g")
     .attr("class", "x axis")
-    .attr("transform", "translate(0," + height4 + ")")
-    .call(xAxis4)
+    .attr("transform", "translate(0," + height2 + ")")
+    .call(xAxis2)
     .selectAll("text")
-    .call(wrap, x4.rangeBand());
+    .call(wrap, x2.rangeBand());
 
-  svg4
+  svg2
     .append("g")
     .attr("class", "y axis")
-    .call(yAxis4)
+    .call(yAxis2)
     .append("text")
-    .attr("y", -10)
-    .attr("x", -7)
+    .attr("transform", "rotate(-90)")
+    .attr("y", 6)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
-    .style("font-weight", "bold")
     .text("Works");
 
-  svg4
+  svg2
     .selectAll(".bar")
-    .data(data4)
+    .data(data2)
     .enter()
     .append("rect")
     .attr("class", "bar")
     .attr("x", function(d) {
-      return x4(d.key);
+      return x2(d.key);
     })
-    .attr("width", x4.rangeBand() - 3)
+    .attr("width", x2.rangeBand() - 3)
     .attr("y", function(d) {
-      return y4(d.value);
+      return y2(d.value);
     })
     .attr("height", function(d) {
-      return height4 - y4(d.value);
+      return height2 - y2(d.value);
     })
-    .on("mouseover", tip4.show)
-    .on("mouseout", tip4.hide);
+    .on("mouseover", tip.show)
+    .on("mouseout", tip.hide);
 
-  function wrap(text, width4) {
+  function wrap(text, width2) {
     text.each(function() {
       var text = d3.select(this),
         words = text
@@ -117,7 +116,7 @@ d3.csv("dragonageships.csv", function(error, data4) {
       while ((word = words.pop())) {
         line.push(word);
         tspan.text(line.join(" "));
-        if (tspan.node().getComputedTextLength() > width4) {
+        if (tspan.node().getComputedTextLength() > width2) {
           line.pop();
           tspan.text(line.join(" "));
           line = [word];

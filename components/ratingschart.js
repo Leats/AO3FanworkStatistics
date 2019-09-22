@@ -1,25 +1,25 @@
-var margin2 = { top: 30, right: 20, bottom: 80, left: 60 },
-  width2 = 1270 - margin2.left - margin2.right,
-  height2 = 350 - margin2.top - margin2.bottom;
+var margin5 = { top: 30, right: 20, bottom: 80, left: 60 },
+  width5 = 770 - margin5.left - margin5.right,
+  height5 = 350 - margin5.top - margin5.bottom;
 
-var amountofchars = 20;
+var amountofships = 20;
 
-var x2 = d3.scale.ordinal().rangeRoundBands([0, width2], 0.05);
+var x5 = d3.scale.ordinal().rangeRoundBands([0, width5], 0.05);
 
-var y2 = d3.scale.linear().range([height2, 0]);
+var y5 = d3.scale.linear().range([height5, 0]);
 
-var xAxis2 = d3.svg
+var xAxis5 = d3.svg
   .axis()
-  .scale(x2)
+  .scale(x5)
   .orient("bottom");
 
-var yAxis2 = d3.svg
+var yAxis5 = d3.svg
   .axis()
-  .scale(y2)
+  .scale(y5)
   .orient("left")
   .ticks(10);
 
-var tip = d3
+var tip4 = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
@@ -27,74 +27,75 @@ var tip = d3
     return d.value + " works";
   });
 
-var svg2 = d3
-  .select("#chargraph")
+var svg5 = d3
+  .select("#ratingsgraph")
   .append("svg")
-  .attr("width", width2 + margin2.left + margin2.right)
-  .attr("height", height2 + margin2.top + margin2.bottom)
+  .attr("width", width5 + margin5.left + margin5.right)
+  .attr("height", height5 + margin5.top + margin5.bottom)
   .append("g")
-  .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+  .attr("transform", "translate(" + margin5.left + "," + margin5.top + ")");
 
-svg2.call(tip);
+svg5.call(tip4);
 
-d3.csv("dragonagechars.csv", function(error, data2) {
-  data2 = data2.slice(0, amountofchars);
+d3.csv("../data/dragonageratings.csv", function(error, data5) {
+  data5 = data5.slice(0, amountofships);
 
-  data2.forEach(function(d) {
+  data5.forEach(function(d) {
     d.value = +d.value;
   });
 
-  x2.domain(
-    data2.map(function(d) {
+  x5.domain(
+    data5.map(function(d) {
       return d.key;
     })
   );
-  y2.domain([
+  y5.domain([
     0,
-    d3.max(data2, function(d) {
+    d3.max(data5, function(d) {
       return d.value;
     })
   ]);
 
-  svg2
+  svg5
     .append("g")
     .attr("class", "x axis")
-    .attr("transform", "translate(0," + height2 + ")")
-    .call(xAxis2)
+    .attr("transform", "translate(0," + height5 + ")")
+    .call(xAxis5)
     .selectAll("text")
-    .call(wrap, x2.rangeBand());
+    .call(wrap, x5.rangeBand());
 
-  svg2
+  svg5
     .append("g")
     .attr("class", "y axis")
-    .call(yAxis2)
+    .call(yAxis5)
     .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
+    .attr("y", -15)
+    .attr("x", -7)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
+    .style("font-weight", "bold")
     .text("Works");
 
-  svg2
+  svg5
     .selectAll(".bar")
-    .data(data2)
+    .data(data5)
     .enter()
     .append("rect")
     .attr("class", "bar")
     .attr("x", function(d) {
-      return x2(d.key);
+      return x5(d.key);
     })
-    .attr("width", x2.rangeBand() - 3)
+    .attr("width", x5.rangeBand() - 3)
     .attr("y", function(d) {
-      return y2(d.value);
+      return y5(d.value);
     })
     .attr("height", function(d) {
-      return height2 - y2(d.value);
+      return height5 - y5(d.value);
     })
-    .on("mouseover", tip.show)
-    .on("mouseout", tip.hide);
+    .on("mouseover", tip4.show)
+    .on("mouseout", tip4.hide);
 
-  function wrap(text, width2) {
+  function wrap(text, width5) {
     text.each(function() {
       var text = d3.select(this),
         words = text
@@ -116,7 +117,7 @@ d3.csv("dragonagechars.csv", function(error, data2) {
       while ((word = words.pop())) {
         line.push(word);
         tspan.text(line.join(" "));
-        if (tspan.node().getComputedTextLength() > width2) {
+        if (tspan.node().getComputedTextLength() > width5) {
           line.pop();
           tspan.text(line.join(" "));
           line = [word];

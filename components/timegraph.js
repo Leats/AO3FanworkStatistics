@@ -2,9 +2,7 @@ var margin = { top: 30, right: 20, bottom: 35, left: 50 },
   width = 1270 - margin.left - margin.right,
   height = 350 - margin.top - margin.bottom;
 
-
-  var parseDate = d3.time.format("%d %b %Y").parse,
-  
+var parseDate = d3.time.format("%d %b %Y").parse,
   bisectDate = d3.bisector(function(d) {
     return d.date;
   }).left;
@@ -23,7 +21,8 @@ var yAxis = d3.svg
   .scale(y)
   .orient("left");
 
-var line = d3.svg.line()
+var line = d3.svg
+  .line()
   .x(function(d) {
     return x(d.date);
   })
@@ -39,7 +38,7 @@ var svg1 = d3
   .append("g")
   .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-d3.csv("dragonagedates.csv", function(error, data) {
+d3.csv("../data/dragonagedates.csv", function(error, data) {
   if (error) throw error;
 
   data.forEach(function(d) {
@@ -93,7 +92,7 @@ d3.csv("dragonagedates.csv", function(error, data) {
     .style("visibility", "hidden")
     .text("A tooltip");
 
-  d3.csv("importantdates.csv", function(idates) {
+  d3.csv("../data/importantdates.csv", function(idates) {
     if (error) throw error;
 
     idates.forEach(function(i) {
@@ -102,7 +101,7 @@ d3.csv("dragonagedates.csv", function(error, data) {
     });
     // Add the lines
     svg1
-      .selectAll('infolines')
+      .selectAll("infolines")
       .data(idates)
       .enter()
       .append("line")
@@ -118,7 +117,7 @@ d3.csv("dragonagedates.csv", function(error, data) {
       .style("stroke-opacity", 0.4)
       .style("stroke", "#510c5c")
       .style("fill", "none")
-      .style("stroke-dasharray",4)
+      .style("stroke-dasharray", 4)
       .on("mouseover", function(d) {
         return tooltip.style("visibility", "visible").text(d.value);
       })

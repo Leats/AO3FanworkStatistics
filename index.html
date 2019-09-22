@@ -2,145 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<style>
-		#toc_container {
-			background: #ffffff none repeat scroll 0 0;
-			border: 1px solid #aaa;
-			display: table;
-			font-size: 95%;
-			padding: 10px;
-			margin-left:250px;
-			margin-bottom: 1em;
-			margin-top: 1em;
-			width: auto;
-			line-height: 1.5;
-			text-align: left;
-		}
-
-		#toc_container li,
-		#toc_container ul,
-		#toc_container ul li {
-			list-style: outside none none !important;
-		}
-
-		body {
-			font: 15px sans-serif;
-			color: #141414;
-			background-color: #ffffff;
-			line-height: 1.5;
-		}
-
-		.header {
-			font: 18px sans-serif;
-			height: 100px;
-			background: rgb(224, 224, 224);
-			text-align: center;
-			padding: 10px;
-			vertical-align: middle;
-		}
-
-		.graphs {
-			font-size: 11px;
-			background-color: #f9f9f9;
-			border: 1px solid #aaa;
-		}
-
-		.footer {
-			background: rgb(224, 224, 224);
-			text-align: left;
-			padding: 10px;
-		}
-
-		.content {
-			padding: 15px;
-			text-align: center;
-		}
-
-		.wrapper {
-			width: 1320px;
-			margin: 0 auto;
-			background-color: rgb(255, 255, 255);
-		}
-
-		.axis path,
-		.axis line {
-			fill: none;
-			stroke: #000;
-			shape-rendering: crispEdges;
-		}
-
-		a {
-			color: #98065e;
-		}
-
-		a:hover {
-			color: #f56735;
-		}
-
-		.x.axis path {
-			display: none;
-		}
-
-		.line {
-			fill: none;
-			stroke: #98065e;
-			stroke-width: 1.5px;
-			z-index: 10;
-		}
-
-		.overlay {
-			fill: none;
-			pointer-events: all;
-		}
-
-		.focus circle {
-			fill: none;
-			stroke: #f38181;
-		}
-
-		.bar {
-			fill: #98065e;
-		}
-
-		.bar:hover {
-			fill: #d12e50;
-		}
-
-		.d3-tip {
-			line-height: 1;
-			font-weight: bold;
-			padding: 12px;
-			background: rgba(0, 0, 0, 0.8);
-			color: #fff;
-			border-radius: 2px;
-			text-align: center;
-		}
-
-		/* Creates a small triangle extender for the tooltip */
-		.d3-tip:after {
-			box-sizing: border-box;
-			display: inline;
-			font-size: 10px;
-			width: 100%;
-			line-height: 1;
-			color: rgba(0, 0, 0, 0.8);
-			content: "\25BC";
-			position: absolute;
-			text-align: center;
-		}
-
-		/* Style northward tooltips differently */
-		.d3-tip.n:after {
-			margin: -1px 0 0 0;
-			top: 100%;
-			left: 0;
-		}
-
-		p {
-			width: 900px;
-			margin: auto;
-		}
-	</style>
+	<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -159,7 +21,7 @@
 				<i>Last updated on September 19, 2019 2pm MEST</i>
 
 			<div id="toc_container">
-				<!--<p class="toc_title">Contents</p>--><strong>Contents</strong>
+				<strong>Contents</strong>
 				<ul class="toc_list">
 					<li><a href="#TimeOfUpdate">1 Publishing dates</a></li>
 					<li><a href="#Characters">2 Characters</a>
@@ -278,12 +140,12 @@ Female Inquisitor (Dragon Age), Male Inquisitor (Dragon Age), Inquisitor (Dragon
 	</div>
 	<script src="//d3js.org/d3.v3.min.js"></script>
 	<script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
-	<script src="timegraph.js"></script>
-	<script src="charchart.js"></script>
-	<script src="mainchars.js"></script>
-	<script src="shipchart.js"></script>
-	<script src="ratingschart.js"></script>
-	<script src="lengthandchapters.js"></script>
+	<script src="/components/timegraph.js"></script>
+	<script src="/components/charchart.js"></script>
+	<script src="/components/mainchars.js"></script>
+	<script src="/components/shipchart.js"></script>
+	<script src="/components/ratingschart.js"></script>
+	<script src="/components/lengthandchapters.js"></script>
 </body>
 
 </html>
