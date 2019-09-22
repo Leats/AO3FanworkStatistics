@@ -91,7 +91,7 @@ d3.csv("./data/dragonagedates.csv", function(error, data) {
     .style("visibility", "hidden")
     .text("A tooltip");
 
-  d3.csv("../data/importantdates.csv", function(idates) {
+  d3.csv("./data/importantdates.csv", function(idates) {
     if (error) throw error;
 
     idates.forEach(function(i) {
