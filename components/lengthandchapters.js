@@ -62,7 +62,7 @@ const svg6 = d3
 
 svg6.call(tip6);
 
-d3.csv("../data/dragonageworklengths.csv", function(error, data6) {
+d3.csv("./data/dragonageworklengths.csv", function(error, data6) {
   const minvalue = data6[0].lengths;
   //const maxvalue = data6[data6.length - 1].lengths;
   const maxvalue = largestwork;

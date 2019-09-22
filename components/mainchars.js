@@ -40,7 +40,7 @@ const svg3 = d3
 
 svg3.call(tip3);
 
-d3.json("../data/dragonageinquisitionmains.json", function(error, data3) {
+d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
   const categoriesNames = data3.map(function(d) {
     return d.categorie;
   });

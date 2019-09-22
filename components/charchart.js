@@ -39,7 +39,7 @@ const svg2 = d3
 svg2.call(tip);
 
 // open data
-d3.csv("../data/dragonagechars.csv", function(error, data2) {
+d3.csv("./data/dragonagechars.csv", function(error, data2) {
   data2 = data2.slice(0, amountofchars);
 
   data2.forEach(function(d) {

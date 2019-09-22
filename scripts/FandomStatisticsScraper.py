@@ -14,9 +14,8 @@ page = urlopen(url)
 soup = BeautifulSoup(page, 'html.parser')
 
 # check how many pages there are
-# last_page = int(soup.find(
-#    "ol", {"class": "pagination actions"}).findAll("li")[-2].string)
-last_page = 25
+last_page = int(soup.find(
+    "ol", {"class": "pagination actions"}).findAll("li")[-2].string)
 
 fandoms = {}
 relationships = {}

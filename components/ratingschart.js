@@ -34,7 +34,7 @@ const svg5 = d3
 
 svg5.call(tip5);
 
-d3.csv("../data/dragonageratings.csv", function(error, data5) {
+d3.csv("./data/dragonageratings.csv", function(error, data5) {
   data5 = data5.slice(0, amountofships);
 
   data5.forEach(function(d) {
