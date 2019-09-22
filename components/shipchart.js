@@ -1,25 +1,24 @@
-var margin4 = { top: 30, right: 20, bottom: 80, left: 60 },
+const margin4 = { top: 30, right: 20, bottom: 80, left: 60 },
   width4 = 1270 - margin4.left - margin4.right,
   height4 = 350 - margin4.top - margin4.bottom;
 
-var amountofships = 20;
+let amountofships = 20;
 
-var x4 = d3.scale.ordinal().rangeRoundBands([0, width4], 0.05);
+const x4 = d3.scale.ordinal().rangeRoundBands([0, width4], 0.05);
+const y4 = d3.scale.linear().range([height4, 0]);
 
-var y4 = d3.scale.linear().range([height4, 0]);
-
-var xAxis4 = d3.svg
+const xAxis4 = d3.svg
   .axis()
   .scale(x4)
   .orient("bottom");
 
-var yAxis4 = d3.svg
+const yAxis4 = d3.svg
   .axis()
   .scale(y4)
   .orient("left")
   .ticks(10);
 
-var tip4 = d3
+const tip4 = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
@@ -27,7 +26,7 @@ var tip4 = d3
     return d.value + " works";
   });
 
-var svg4 = d3
+const svg4 = d3
   .select("#shipgraph")
   .append("svg")
   .attr("width", width4 + margin4.left + margin4.right)
@@ -97,7 +96,7 @@ d3.csv("../data/dragonageships.csv", function(error, data4) {
 
   function wrap(text, width4) {
     text.each(function() {
-      var text = d3.select(this),
+      let text = d3.select(this),
         words = text
           .text()
           .split(/\s+/)

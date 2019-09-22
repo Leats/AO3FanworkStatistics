@@ -1,25 +1,22 @@
-var margin5 = { top: 30, right: 20, bottom: 80, left: 60 },
+const margin5 = { top: 30, right: 20, bottom: 80, left: 60 },
   width5 = 770 - margin5.left - margin5.right,
   height5 = 350 - margin5.top - margin5.bottom;
 
-var amountofships = 20;
+const x5 = d3.scale.ordinal().rangeRoundBands([0, width5], 0.05);
+const y5 = d3.scale.linear().range([height5, 0]);
 
-var x5 = d3.scale.ordinal().rangeRoundBands([0, width5], 0.05);
-
-var y5 = d3.scale.linear().range([height5, 0]);
-
-var xAxis5 = d3.svg
+const xAxis5 = d3.svg
   .axis()
   .scale(x5)
   .orient("bottom");
 
-var yAxis5 = d3.svg
+const yAxis5 = d3.svg
   .axis()
   .scale(y5)
   .orient("left")
   .ticks(10);
 
-var tip4 = d3
+const tip5 = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
@@ -27,7 +24,7 @@ var tip4 = d3
     return d.value + " works";
   });
 
-var svg5 = d3
+const svg5 = d3
   .select("#ratingsgraph")
   .append("svg")
   .attr("width", width5 + margin5.left + margin5.right)
@@ -35,7 +32,7 @@ var svg5 = d3
   .append("g")
   .attr("transform", "translate(" + margin5.left + "," + margin5.top + ")");
 
-svg5.call(tip4);
+svg5.call(tip5);
 
 d3.csv("../data/dragonageratings.csv", function(error, data5) {
   data5 = data5.slice(0, amountofships);
@@ -92,12 +89,12 @@ d3.csv("../data/dragonageratings.csv", function(error, data5) {
     .attr("height", function(d) {
       return height5 - y5(d.value);
     })
-    .on("mouseover", tip4.show)
-    .on("mouseout", tip4.hide);
+    .on("mouseover", tip5.show)
+    .on("mouseout", tip5.hide);
 
   function wrap(text, width5) {
     text.each(function() {
-      var text = d3.select(this),
+      let text = d3.select(this),
         words = text
           .text()
           .split(/\s+/)

@@ -1,4 +1,5 @@
-var margin6 = { top: 30, right: 60, bottom: 80, left: 60 },
+// define size of graphic
+const margin6 = { top: 30, right: 60, bottom: 80, left: 60 },
   width6 = 1270 - margin6.left - margin6.right,
   height6 = 500 - margin6.top - margin6.bottom;
 
@@ -14,31 +15,29 @@ const binamount = 50;
 // The largest wordcount considered
 const largestwork = 90000;
 
-var x6 = d3.scale.linear().range([0, width6], 0.05);
+const x6 = d3.scale.linear().range([0, width6], 0.05);
+const y6 = d3.scale.linear().range([height6, 0]);
+const y26 = d3.scale.linear().range([height6, 0]);
 
-var y6 = d3.scale.linear().range([height6, 0]);
-
-var y26 = d3.scale.linear().range([height6, 0]);
-
-var xAxis6 = d3.svg
+const xAxis6 = d3.svg
   .axis()
   .scale(x6)
   .ticks(binamount / 2)
   .orient("bottom");
 
-var yAxis6 = d3.svg
+const yAxis6 = d3.svg
   .axis()
   .scale(y6)
   .orient("left")
   .ticks(10);
 
-var yAxis26 = d3.svg
+const yAxis26 = d3.svg
   .axis()
   .scale(y26)
   .orient("right")
   .ticks(5);
 
-var tip6 = d3
+const tip6 = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
@@ -53,7 +52,7 @@ var tip6 = d3
     );
   });
 
-var svg6 = d3
+const svg6 = d3
   .select("#lengthgraph")
   .append("svg")
   .attr("width", width6 + margin6.left + margin6.right)
@@ -80,8 +79,7 @@ d3.csv("../data/dragonageworklengths.csv", function(error, data6) {
     if (d.lengths <= largestwork) {
       d.lengths = +d.lengths;
       d.chapters = +d.chapters;
-      //var bin = Math.floor(d.lengths / binsize);
-      var bin = Math.floor(d.lengths / binsize);
+      let bin = Math.floor(d.lengths / binsize);
       if (bin.toString() != "NaN" && bin < histdata.length) {
         histdata[bin].amount += 1;
         histdata[bin].chapters += d.chapters;
@@ -150,7 +148,6 @@ d3.csv("../data/dragonageworklengths.csv", function(error, data6) {
     .attr("transform", "translate(" + width6 + " ,0)")
     .call(yAxis26)
     .append("text")
-    //.attr("transform", "rotate(-90)")
     .attr("y", -12)
     .attr("x", +60)
     .attr("dy", ".71em")

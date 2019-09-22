@@ -1,25 +1,26 @@
-var margin2 = { top: 30, right: 20, bottom: 80, left: 60 },
+// define size of graphic
+const margin2 = { top: 30, right: 20, bottom: 80, left: 60 },
   width2 = 1270 - margin2.left - margin2.right,
   height2 = 350 - margin2.top - margin2.bottom;
 
-var amountofchars = 20;
+// set number of characters displayed
+const amountofchars = 20;
 
-var x2 = d3.scale.ordinal().rangeRoundBands([0, width2], 0.05);
+const x2 = d3.scale.ordinal().rangeRoundBands([0, width2], 0.05);
+const y2 = d3.scale.linear().range([height2, 0]);
 
-var y2 = d3.scale.linear().range([height2, 0]);
-
-var xAxis2 = d3.svg
+const xAxis2 = d3.svg
   .axis()
   .scale(x2)
   .orient("bottom");
 
-var yAxis2 = d3.svg
+const yAxis2 = d3.svg
   .axis()
   .scale(y2)
   .orient("left")
   .ticks(10);
 
-var tip = d3
+const tip = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
@@ -27,7 +28,7 @@ var tip = d3
     return d.value + " works";
   });
 
-var svg2 = d3
+const svg2 = d3
   .select("#chargraph")
   .append("svg")
   .attr("width", width2 + margin2.left + margin2.right)
@@ -37,6 +38,7 @@ var svg2 = d3
 
 svg2.call(tip);
 
+// open data
 d3.csv("../data/dragonagechars.csv", function(error, data2) {
   data2 = data2.slice(0, amountofchars);
 
@@ -96,7 +98,7 @@ d3.csv("../data/dragonagechars.csv", function(error, data2) {
 
   function wrap(text, width2) {
     text.each(function() {
-      var text = d3.select(this),
+      let text = d3.select(this),
         words = text
           .text()
           .split(/\s+/)
@@ -104,7 +106,7 @@ d3.csv("../data/dragonagechars.csv", function(error, data2) {
         word,
         line = [],
         lineNumber = 0,
-        lineHeight = 1.1, // ems
+        lineHeight = 1.1,
         y = text.attr("y"),
         dy = parseFloat(text.attr("dy")),
         tspan = text

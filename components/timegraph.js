@@ -1,27 +1,26 @@
-var margin = { top: 30, right: 20, bottom: 35, left: 50 },
+const margin = { top: 30, right: 20, bottom: 35, left: 50 },
   width = 1270 - margin.left - margin.right,
   height = 350 - margin.top - margin.bottom;
 
-var parseDate = d3.time.format("%d %b %Y").parse,
+const parseDate = d3.time.format("%d %b %Y").parse,
   bisectDate = d3.bisector(function(d) {
     return d.date;
   }).left;
 
-var x = d3.time.scale().range([0, width]);
+const x = d3.time.scale().range([0, width]);
+const y = d3.scale.linear().range([height, 0]);
 
-var y = d3.scale.linear().range([height, 0]);
-
-var xAxis = d3.svg
+const xAxis = d3.svg
   .axis()
   .scale(x)
   .orient("bottom");
 
-var yAxis = d3.svg
+const yAxis = d3.svg
   .axis()
   .scale(y)
   .orient("left");
 
-var line = d3.svg
+const line = d3.svg
   .line()
   .x(function(d) {
     return x(d.date);
@@ -30,7 +29,7 @@ var line = d3.svg
     return y(d.value);
   });
 
-var svg1 = d3
+const svg1 = d3
   .select("#timegraph")
   .append("svg")
   .attr("width", width + margin.left + margin.right)
@@ -83,7 +82,7 @@ d3.csv("../data/dragonagedates.csv", function(error, data) {
     .style("font-weight", "bold")
     .text("Works per day");
 
-  var tooltip = svg1
+  const tooltip = svg1
     .append("text")
     .style("position", "absolute")
     .style("font-size", "14px")

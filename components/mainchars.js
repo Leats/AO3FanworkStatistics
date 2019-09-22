@@ -1,25 +1,24 @@
-var margin3 = { top: 20, right: 20, bottom: 30, left: 40 },
+// define size of graphic
+const margin3 = { top: 20, right: 20, bottom: 30, left: 40 },
   width3 = 1270 - margin3.left - margin3.right,
   height3 = 350 - margin3.top - margin3.bottom;
 
-var x03 = d3.scale.ordinal().rangeRoundBands([0, width3], 0.1);
+const x03 = d3.scale.ordinal().rangeRoundBands([0, width3], 0.1);
+const x13 = d3.scale.ordinal();
+const y3 = d3.scale.linear().range([height3, 0]);
 
-var x13 = d3.scale.ordinal();
-
-var y3 = d3.scale.linear().range([height3, 0]);
-
-var xAxis3 = d3.svg
+const xAxis3 = d3.svg
   .axis()
   .scale(x03)
   .tickSize(0)
   .orient("bottom");
 
-var yAxis3 = d3.svg
+const yAxis3 = d3.svg
   .axis()
   .scale(y3)
   .orient("left");
 
-var tip3 = d3
+const tip3 = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
@@ -27,11 +26,11 @@ var tip3 = d3
     return d.value + " works";
   });
 
-var color = d3.scale
+const color = d3.scale
   .ordinal()
   .range(["#510c5c", "#98065e", "#d12e50", "#f56735", "#ffa600"]);
 
-var svg3 = d3
+const svg3 = d3
   .select("#mainchargraph")
   .append("svg")
   .attr("width", width3 + margin3.left + margin3.right)
@@ -42,10 +41,10 @@ var svg3 = d3
 svg3.call(tip3);
 
 d3.json("../data/dragonageinquisitionmains.json", function(error, data3) {
-  var categoriesNames = data3.map(function(d) {
+  const categoriesNames = data3.map(function(d) {
     return d.categorie;
   });
-  var rateNames = data3[0].values.map(function(d) {
+  const rateNames = data3[0].values.map(function(d) {
     return d.rate;
   });
 
@@ -86,7 +85,7 @@ d3.json("../data/dragonageinquisitionmains.json", function(error, data3) {
     .delay(1300)
     .style("opacity", "1");
 
-  var slice = svg3
+  const slice = svg3
     .selectAll(".slice")
     .data(data3)
     .enter()
@@ -143,7 +142,7 @@ d3.json("../data/dragonageinquisitionmains.json", function(error, data3) {
     });
 
   //Legend
-  var legend = svg3
+  const legend = svg3
     .selectAll(".legend")
     .data(
       data3[0].values
