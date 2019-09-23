@@ -4,7 +4,7 @@ This was created because I originally wanted to make some statistics regarding t
 
 I created a script to go through the tag and save the data of every fanwork in the tag. The script also counts how often specific characters and ships were used, plus a few other interesting things.
 It was also the first time I worked with d3 to create data graphics with the collected data.
-The result can be seen [here](https://leats.github.io/DragonAgeStats/).
+The result can be seen [here](https://leats.github.io/AO3FanworkStatistics/).
 
 ---
 ### How to create other statistics
