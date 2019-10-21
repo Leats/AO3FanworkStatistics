@@ -22,4 +22,4 @@ To create other statistics there is a [branch with a template](https://github.co
 
 **Step 5 (optional):** In `/components/lengthandchapters.js` the works get sorted into different bins to show the amount of works with different wordcounts. As standard this is set to 50 bins and the bins reach from 0 to 90000 words. This can be changed by opening the file and changing `binamount` and `largestwork` to something different. Depending on the size of the tag this might be needed. 
 
-**Note:** To actually view the created graphs it is not enough to simply view the file in your web browser of choice. The easiest way to run it in a web server is probably using `python3 -m http.server` or in case of Python 2 `python -m SimpleHTTPServer`. Alternatively it is possible to use github pages as seen int his repository.
+**Note:** To actually view the created graphs it is not enough to simply view the file in your web browser of choice. The easiest way to run it in a web server is probably using `python3 -m http.server` or in case of Python 2 `python -m SimpleHTTPServer`. Alternatively it is possible to use github pages as seen in this repository.
