@@ -82,7 +82,7 @@ d3.json("./data/haikyuu/ficdates.json", function (error, data) {
     .text("Works per day");
 
   // add the lines for the date annotations
-  d3.json("/data/haikyuu/importantdates.json", function (idates) {
+  d3.json("./data/haikyuu/importantdates.json", function (idates) {
     if (error) throw error;
 
     idates.forEach(function (i) {
