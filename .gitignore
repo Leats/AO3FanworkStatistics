@@ -1,1 +1,5 @@
 .DS_Store
+database.ini
+venv/
+__pycache__
+.vscode

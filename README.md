@@ -1,25 +1,30 @@
 # AO3 Fanwork Statistics
 
-This was created because I originally wanted to make some statistics regarding the Dragon Age tag on [archiveofourown.org](http://archiveofourown.org).
+This was created because I originally wanted to make some statistics regarding the Dragon Age tag on [archiveofourown.org](http://archiveofourown.org). By now it has developed into Haikyuu statistics.
 
-I created a script to go through the tag and save the data of every fanwork in the tag. The script also counts how often specific characters and ships were used, plus a few other interesting things.
-It was also the first time I worked with d3 to create data graphics with the collected data.
-The result can be seen [here](https://leats.github.io/AO3FanworkStatistics/).
+I created a script to go through the tag and save the data of every fanwork in the tag to a postgresql database.
+
+Back in 2018 this was also the first time I worked with d3 to create data graphics with the collected data.
+In 2021 I redid parts of the visualizations.
+
+**The result can be seen [here](https://leats.github.io/AO3FanworkStatistics/).**
+
+**Limitations: Only fanworks visible for everyone are counted in these statistics. Works where one has to be logged in were ignored.**
 
 ---
-### How to create other statistics
-
-To create other statistics there is a [branch with a template](https://github.com/Leats/AO3FanworkStatistics/tree/template). It should work with any tag on AO3. This includes fandoms, characters, ships and freeform tags. Specific searches and filtered searches are not supported.
+### What I did / Structure of the Project
 
 
-**Step 1:** Clone the repository, use the ['template' branch](https://github.com/Leats/AO3FanworkStatistics/tree/template).
+#### Scraper
+The script I used to scrape AO3 is found in `/scripts/FandomStatisticsScraper.py`. For it to run properly a [PostgreSQL database](https://www.postgresql.org/download/) is needed and the credentials need to get entered into `/database.ini` (an example file is already in the repository).
 
-**Step 2:** Edit `/scripts/FandomStatisticsScraper.py`. Change the `url` with whatever you want to have searched.
+Right now, especially with large AO3 tags this scraper will take HOURS because it rests 7 seconds between pages. Every wait shorter than this might trigger `429 - Too Many Requests`. For fandoms that consist of more than 100,000 fanworks the originally displayed amount of pages will not be correct as AO3 can only display 5000 pages at once. Every additional one will only be properly counted once we're on page 5000. (Right now this script would not look at more than 200,000 fanworks at most.)
 
-**Step 3:** Run the script. (If you've never done that before, check out [this](https://realpython.com/run-python-scripts/).) This will probably take a while, depending on the size of the tag. Eventually this should save some data into the `/data` folder of the project.
+#### Flask App
+Originally I had planned on using a Flask app with SQLAlchemy for this project. However, as I still want to use github pages for the visualisations right now I did work without the flask app. But the file for it is still in the repository (`/app.py`), and I might continue on adding visualisations directly accessing the database as that gives a lot more options. For now, though, the visualisations only use pre-created JSON files with the data.
 
-**Step 4:** In `/data/importantdates.csv` there is a chance to place important dates for the specific fandom. This could be specific release dates, for example.
+#### Visualisations
+I use [skrollr](https://github.com/Prinzhorn/skrollr) for the website and [D3](https://d3js.org/) for the graphs.
 
-**Step 5 (optional):** In `/components/lengthandchapters.js` the works get sorted into different bins to show the amount of works with different wordcounts. As standard this is set to 50 bins and the bins reach from 0 to 90000 words. This can be changed by opening the file and changing `binamount` and `largestwork` to something different. Depending on the size of the tag this might be needed. 
-
-**Note:** To actually view the created graphs it is not enough to simply view the file in your web browser of choice. The easiest way to run it in a web server is probably using `python3 -m http.server` or in case of Python 2 `python -m SimpleHTTPServer`. Alternatively it is possible to use github pages as seen in this repository.
+#### The past version
+The parts only used in the past version can be seen in `/past version`. This includes the data of the Dragon Age tag on AO3 and the original `html` and `js` files. These are currently not used in the new version.

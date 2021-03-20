@@ -1,22 +1,22 @@
 // define size of graphic
-const margin2 = { top: 30, right: 20, bottom: 80, left: 60 },
-  width2 = 1270 - margin2.left - margin2.right,
-  height2 = 350 - margin2.top - margin2.bottom;
+const marginChar = { top: 30, right: 20, bottom: 80, left: 60 },
+  widthChar = 1270 - marginChar.left - marginChar.right,
+  heightChar = 350 - marginChar.top - marginChar.bottom;
 
 // set number of characters displayed
-const amountofchars = 20;
+const amountOfChars = 20;
 
-const x2 = d3.scale.ordinal().rangeRoundBands([0, width2], 0.05);
-const y2 = d3.scale.linear().range([height2, 0]);
+const xChars = d3.scale.ordinal().rangeRoundBands([0, widthChar], 0.05);
+const yChars = d3.scale.linear().range([heightChar, 0]);
 
-const xAxis2 = d3.svg
+const xAxisChars = d3.svg
   .axis()
-  .scale(x2)
+  .scale(xChars)
   .orient("bottom");
 
-const yAxis2 = d3.svg
+const yAxisChars = d3.svg
   .axis()
-  .scale(y2)
+  .scale(yChars)
   .orient("left")
   .ticks(10);
 
@@ -24,80 +24,81 @@ const tip = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
-  .html(function(d) {
+  .html(function (d) {
     return d.value + " works";
   });
 
-const svg2 = d3
+const svgChars = d3
   .select("#chargraph")
   .append("svg")
-  .attr("width", width2 + margin2.left + margin2.right)
-  .attr("height", height2 + margin2.top + margin2.bottom)
+  .attr("width", widthChar + marginChar.left + marginChar.right)
+  .attr("height", heightChar + marginChar.top + marginChar.bottom)
   .append("g")
-  .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
+  .attr("transform", "translate(" + marginChar.left + "," + marginChar.top + ")");
 
-svg2.call(tip);
+svgChars.call(tip);
 
 // open data
-d3.csv("./data/dragonagechars.csv", function(error, data2) {
-  data2 = data2.slice(0, amountofchars);
+d3.json("./data/haikyuu/chars.json", function (error, dataChars) {
+  dataChars = dataChars.slice(0, amountOfChars);
 
-  data2.forEach(function(d) {
+  dataChars.forEach(function (d) {
     d.value = +d.value;
   });
 
-  x2.domain(
-    data2.map(function(d) {
-      return d.key;
+  xChars.domain(
+    dataChars.map(function (d) {
+      return d.character;
     })
   );
-  y2.domain([
+  yChars.domain([
     0,
-    d3.max(data2, function(d) {
+    d3.max(dataChars, function (d) {
       return d.value;
     })
   ]);
 
-  svg2
+  svgChars
     .append("g")
     .attr("class", "x axis")
-    .attr("transform", "translate(0," + height2 + ")")
-    .call(xAxis2)
+    .attr("transform", "translate(0," + heightChar + ")")
+    .call(xAxisChars)
     .selectAll("text")
-    .call(wrap, x2.rangeBand());
+    .call(wrap, xChars.rangeBand());
 
-  svg2
+  svgChars
     .append("g")
     .attr("class", "y axis")
-    .call(yAxis2)
+    .call(yAxisChars)
     .append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
+    .attr("y", -4)
+    .attr("x", -7)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
+    .style("font-weight", "bold")
     .text("Works");
 
-  svg2
+  svgChars
     .selectAll(".bar")
-    .data(data2)
+    .data(dataChars)
     .enter()
     .append("rect")
     .attr("class", "bar")
-    .attr("x", function(d) {
-      return x2(d.key);
+    .attr("x", function (d) {
+      return xChars(d.character);
     })
-    .attr("width", x2.rangeBand() - 3)
-    .attr("y", function(d) {
-      return y2(d.value);
+    .attr("width", xChars.rangeBand() - 3)
+    .attr("y", function (d) {
+      return yChars(d.value);
     })
-    .attr("height", function(d) {
-      return height2 - y2(d.value);
+    .attr("height", function (d) {
+      return heightChar - yChars(d.value);
     })
     .on("mouseover", tip.show)
     .on("mouseout", tip.hide);
 
-  function wrap(text, width2) {
-    text.each(function() {
+  function wrap(text, widthChar) {
+    text.each(function () {
       let text = d3.select(this),
         words = text
           .text()
@@ -118,7 +119,7 @@ d3.csv("./data/dragonagechars.csv", function(error, data2) {
       while ((word = words.pop())) {
         line.push(word);
         tspan.text(line.join(" "));
-        if (tspan.node().getComputedTextLength() > width2) {
+        if (tspan.node().getComputedTextLength() > widthChar) {
           line.pop();
           tspan.text(line.join(" "));
           line = [word];

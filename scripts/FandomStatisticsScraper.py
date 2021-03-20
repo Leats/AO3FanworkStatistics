@@ -1,14 +1,192 @@
-import csv
-import json
 import time
-from collections import OrderedDict
+import psycopg2
 from datetime import datetime
 from urllib.request import urlopen
-
+from configparser import ConfigParser
 from bs4 import BeautifulSoup
 
 # this is the url of the tag which should get searched
-url = "https://archiveofourown.org/tags/Dragon%20Age%20-%20All%20Media%20Types/works"
+# please note that some fanfics are only shown to logged in users
+# this scraper won't see them
+url = "https://archiveofourown.org/tags/Haikyuu!!/works"
+
+
+def config(filename='database.ini', section='postgresql'):
+    # create a parser
+    parser = ConfigParser()
+    # read config file
+    parser.read(filename)
+
+    # get section, default to postgresql
+    db = {}
+    if parser.has_section(section):
+        params = parser.items(section)
+        for param in params:
+            db[param[0]] = param[1]
+    else:
+        raise Exception(
+            'Section {0} not found in the {1} file'.format(section, filename))
+
+    return db
+
+
+def create_tables(cur):
+    """Create tables in the PostgreSQL database."""
+    commands = ("""CREATE TABLE IF NOT EXISTS works (
+                id INTEGER PRIMARY KEY,
+                title VARCHAR NOT NULL,
+                author VARCHAR,
+                date DATE,
+                rating VARCHAR,
+                warnings VARCHAR,
+                category VARCHAR,
+                status VARCHAR,
+                fandoms VARCHAR [],
+                relationships VARCHAR [],
+                characters VARCHAR [],
+                tags VARCHAR [],
+                language VARCHAR,
+                words INTEGER,
+                chapters INTEGER,
+                comments INTEGER,
+                kudos INTEGER,
+                bookmarks INTEGER,
+                hits INTEGER,
+                collections INTEGER
+        )""",)
+    try:
+        # create table one by one
+        for command in commands:
+            cur.execute(command)
+        # commit the changes
+        conn.commit()
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+
+
+def add_new_page(soup, cur, conn):
+    works = soup.find("ol", {"class": "work index group"})
+    for work in works.findAll("li", {"role": "article"}):
+        new_work = {}
+
+        # work details
+        # id
+        new_work['id'] = work.find("h4").find("a")['href'].rsplit('/', 1)[1]
+        # name
+        new_work['title'] = work.find("h4").find("a").string
+        # author, which can be anonymous
+        author = work.find("h4").find("a").findNext("a")
+        new_work['author'] = author.string
+        # date
+        new_work['date'] = work.find("p", {"class": "datetime"}).string
+        # rating, type of ship, warnings and status
+        req_tags = work.find(
+            "ul", {"class": "required-tags"}).findAll("span", {"class": "text"})
+        new_work['rating'] = req_tags[0].text
+        new_work['warnings'] = req_tags[1].text
+        new_work['category'] = req_tags[2].text
+        new_work['status'] = req_tags[3].text
+
+        # work fandoms
+        work_fandoms = []
+        for link in work.find("h5", {"class": "fandoms heading"}).findAll("a"):
+            fan = link.string
+
+            # adds to work list
+            work_fandoms.append(fan)
+
+        new_work['fandoms'] = work_fandoms
+
+        # work relationships
+        work_relationships = []
+        for relationship in work.findAll("li", {"class": "relationships"}):
+            rel = relationship.find("a").string
+
+            # adds to work list
+            work_relationships.append(rel)
+
+        new_work['relationships'] = work_relationships
+
+        # work characters
+        work_characters = []
+        for character in work.findAll("li", {"class": "characters"}):
+            char = character.find("a").string
+
+            # adds to work list
+            work_characters.append(char)
+
+        new_work['characters'] = work_characters
+
+        # work tags
+        work_freeforms = []
+        for freeform in work.findAll("li", {"class": "freeforms"}):
+            free = freeform.find("a").string
+
+            # adds to work list
+            work_freeforms.append(free)
+
+        for freeform in work.findAll("li", {"class": "freeforms last"}):
+            free = freeform.find("a").string
+
+            # adds to work list
+            work_freeforms.append(free)
+
+        new_work['tags'] = work_freeforms
+
+        for stat in work.find("dl", {"class": "stats"}).findAll("dd"):
+            if stat['class'][0] == 'chapters':
+                if stat.find("a") is not None:
+                    new_work['chapters'] = int(stat.find("a").string)
+                else:
+                    new_work['chapters'] = 1
+            elif stat['class'][0] == 'language':
+                new_work['language'] = stat.string
+            elif stat.string is not None:
+                new_work[stat['class'][0]] = int(stat.string.replace(',', ''))
+
+        columns = new_work.keys()
+        values = [new_work[column] for column in columns]
+        vals_str_list = ["%s"] * len(values)
+        vals_str = ", ".join(vals_str_list)
+
+        cur.execute("""INSERT INTO works ({cols}) VALUES ({vals_str}) ON CONFLICT (id) DO UPDATE SET
+                        title = EXCLUDED.title,
+                        author = EXCLUDED.author,
+                        date = EXCLUDED.date,
+                        rating = EXCLUDED.rating,
+                        warnings = EXCLUDED.warnings,
+                        category = EXCLUDED.category,
+                        status = EXCLUDED.status,
+                        fandoms = EXCLUDED.fandoms,
+                        relationships = EXCLUDED.relationships,
+                        characters = EXCLUDED.characters,
+                        tags = EXCLUDED.tags,
+                        language = EXCLUDED.language,
+                        words = EXCLUDED.words,
+                        chapters = EXCLUDED.chapters,
+                        comments = EXCLUDED.comments,
+                        kudos = EXCLUDED.kudos,
+                        bookmarks = EXCLUDED.bookmarks,
+                        hits = EXCLUDED.hits,
+                        collections = EXCLUDED.collections ;""".format(
+            cols=', '.join(tuple(columns)), vals_str=vals_str), values)
+        conn.commit()
+    print(new_work)
+    return new_work['date']
+
+
+conn = None
+try:
+    # read the connection parameters
+    params = config()
+    # connect to the PostgreSQL server
+    conn = psycopg2.connect(**params)
+    cur = conn.cursor()
+except (Exception, psycopg2.DatabaseError) as error:
+    print(error)
+
+# create the tables if they're not there yet
+create_tables(cur)
 
 page = urlopen(url)
 soup = BeautifulSoup(page, 'html.parser')
@@ -17,190 +195,35 @@ soup = BeautifulSoup(page, 'html.parser')
 last_page = int(soup.find(
     "ol", {"class": "pagination actions"}).findAll("li")[-2].string)
 
-fandoms = {}
-relationships = {}
-characters = {}
-freeforms = {}
-
-# each work is saved as a list containing title/author/date/required tags, every fandom,
-# relationship, character and "normal" tag, plus language/word count/chapters/comments/kudos/bookmarks/hits
-# all of those are separate lists
-works = []
-
 for i in range(1, last_page + 1):
-    # optional wait between access of pages
-    # time.sleep(.25)
+    # we need to wait a long time between pages because otherwise AO3 complains
+    time.sleep(7)
     print("On page " + str(i) + " of " + str(last_page))
     newurl = url + "?page=" + str(i)
-    page = urlopen(newurl)
-    soup = BeautifulSoup(page, 'html.parser')
+    soup = BeautifulSoup(urlopen(newurl), 'html.parser')
+    last_date = add_new_page(soup, cur, conn)
 
-    for work in soup.findAll("li", {"class": "work blurb group"}):
-        new_work = [[], [], [], [], [], []]
+    # AO3 limits viewable pages to 5000
+    # this means that if there are more than 100000 stories we need to look at the older ones as well
+    # for this we use the latest date and filter for all stories that are at least that old
+    # this will make us look at some stories twice probably but right now I doubt there is a better way
+    # still, this could be prettified a little since there is a bit of duplicate code with the 2nd loop here
+    if i == 5000 and soup.find("div", {"class": "flash notice"}):
+        last_date = datetime.strptime(
+            last_date, "%d %b %Y").strftime("%Y-%m-%d")
+        print(last_date)
+        filtered_url = f"{url}?commit=Sort+and+Filter&utf8=%E2%9C%93&work_search%5Bdate_to%5D={last_date}"
+        soup = BeautifulSoup(urlopen(filtered_url), 'html.parser')
+        new_last_page = int(soup.find(
+            "ol", {"class": "pagination actions"}).findAll("li")[-2].string)
+        for i in range(1, new_last_page + 1):
+            time.sleep(7)
+            print("On page " + str(i) + " of " + str(5000 + new_last_page))
+            newurl = f"{url}?commit=Sort+and+Filter&page={i}&utf8=%E2%9C%93&work_search%5Bdate_to%5D={last_date}"
+            soup = BeautifulSoup(urlopen(newurl), 'html.parser')
+            add_new_page(soup, cur, conn)
 
-        # work details
-        # name
-        new_work[0].append(work.find("h4").find("a").string)
-        # author, which can be anonymous
-        author = work.find("h4").find("a").findNext("a")
-        if author != None:
-            new_work[0].append(author.string)
-        # date
-        new_work[0].append(work.find("p", {"class": "datetime"}).string)
-        # rating, type of ship, warnings and status
-        req_tags = work.find(
-            "ul", {"class": "required-tags"}).findAll("span", {"class": "text"})
-        for t in req_tags:
-            new_work[0].append(t.text)
-
-        # work fandoms
-        for link in work.find("h5", {"class": "fandoms heading"}).findAll("a"):
-            fan = link.string
-
-            # adds to work list
-            new_work[1].append(fan)
-
-            # adds to general list
-            if fan not in fandoms:
-                fandoms[fan] = 1
-            else:
-                fandoms[fan] += 1
-
-        # work relationships
-        for relationship in work.findAll("li", {"class": "relationships"}):
-            rel = relationship.find("a").string
-
-            # adds to work list
-            new_work[2].append(rel)
-
-            # adds to general list
-            if rel not in relationships:
-                relationships[rel] = 1
-            else:
-                relationships[rel] += 1
-
-        # work characters
-        for character in work.findAll("li", {"class": "characters"}):
-            char = character.find("a").string
-
-            # adds to work list
-            new_work[3].append(char)
-
-            # adds to general list
-            if char not in characters:
-                characters[char] = 1
-            else:
-                characters[char] += 1
-
-        # work tags
-        for freeform in work.findAll("li", {"class": "freeforms"}):
-            free = freeform.find("a").string
-
-            # adds to work list
-            new_work[4].append(free)
-
-            # adds to general list
-            if free not in freeforms:
-                freeforms[free] = 1
-            else:
-                freeforms[free] += 1
-
-        for freeform in work.findAll("li", {"class": "freeforms last"}):
-            free = freeform.find("a").string
-
-            # adds to work list
-            new_work[4].append(free)
-
-            # adds to general list
-            if free not in freeforms:
-                freeforms[free] = 1
-            else:
-                freeforms[free] += 1
-
-        for stat in work.find("dl", {"class": "stats"}).findAll("dd"):
-            new_work[5].append(stat.string)
-        works.append(new_work)
-
-
-# save all works in one file
-with open('../data/dragonageworks.json', 'w') as outfile:
-    json.dump(works, outfile)
-
-# save all ships in file
-with open('../data/dragonageships.csv', 'w') as csvfile:
-    fieldnames = ['key', 'value']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    writer.writeheader()
-    for k in relationships:
-        writer.writerow({'key': k, 'value': relationships[k]})
-    csvfile.close()
-
-
-# save character tags in csv
-with open('../data/dragonagechars.csv', 'w') as csvfile:
-    chars = OrderedDict(
-        sorted(characters.items(), key=lambda x: x[1], reverse=True))
-    fieldnames = ['key', 'value']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    writer.writeheader()
-    for k in chars:
-        writer.writerow({'key': k, 'value': chars[k]})
-    csvfile.close()
-
-# save dates
-with open('../data/dragonagedates.csv', 'w') as csvfile:
-    dates = {}
-
-    # only save dates of completed works
-    for work in works:
-        if work[0][-1] == "Complete Work":
-            if work[0][2] not in dates:
-                dates[work[0][2]] = 1
-            else:
-                dates[work[0][2]] += 1
-    fieldnames = ['date', 'value']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    writer.writeheader()
-    for k in dates:
-        writer.writerow({'date': k, 'value': dates[k]})
-    csvfile.close()
-
-# save lengths of the works
-with open('../data/dragonageworklengths.csv', 'w') as csvfile:
-    fieldnames = ['length', 'chapters', 'done']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    writer.writeheader()
-    for k in works:
-        length = str(k[-1][1]).replace('"', '').replace(',', '')
-        # It seems like very few stories are bugged and do not have a word count. these are not saved
-        if "None" in length:
-            continue
-        chapters = k[-1][2].split("/")
-        if chapters[0] == chapters[1]:
-            done = True
-        else:
-            done = False
-        writer.writerow(
-            {'length': length, 'chapters': chapters[0], 'done': done})
-    csvfile.close()
-
-# save ratings in file
-with open('../data/dragonageratings.csv', 'w') as csvfile:
-    ratings = {}
-
-    for work in works:
-        if work[0][3] not in ratings:
-            ratings[work[0][3]] = 1
-        else:
-            ratings[work[0][3]] += 1
-    fieldnames = ['key', 'value']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    writer.writeheader()
-    for k in ratings:
-        writer.writerow({'key': k, 'value': ratings[k]})
-    csvfile.close()
+# close communication with the PostgreSQL database server
+cur.close()
+if conn is not None:
+    conn.close()

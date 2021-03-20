@@ -22,7 +22,7 @@ const tip3 = d3
   .tip()
   .attr("class", "d3-tip")
   .offset([-10, 0])
-  .html(function(d) {
+  .html(function (d) {
     return d.value + " works";
   });
 
@@ -40,11 +40,11 @@ const svg3 = d3
 
 svg3.call(tip3);
 
-d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
-  const categoriesNames = data3.map(function(d) {
+d3.json("./data/dragonageinquisitionmains.json", function (error, data3) {
+  const categoriesNames = data3.map(function (d) {
     return d.categorie;
   });
-  const rateNames = data3[0].values.map(function(d) {
+  const rateNames = data3[0].values.map(function (d) {
     return d.rate;
   });
 
@@ -52,8 +52,8 @@ d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
   x13.domain(rateNames).rangeRoundBands([0, x03.rangeBand()]);
   y3.domain([
     0,
-    d3.max(data3, function(categorie) {
-      return d3.max(categorie.values, function(d) {
+    d3.max(data3, function (categorie) {
+      return d3.max(categorie.values, function (d) {
         return d.value;
       });
     })
@@ -91,35 +91,35 @@ d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
     .enter()
     .append("g")
     .attr("class", "g")
-    .attr("transform", function(d) {
+    .attr("transform", function (d) {
       return "translate(" + x03(d.categorie) + ",0)";
     });
 
   slice
     .selectAll(".bar")
-    .data(function(d) {
+    .data(function (d) {
       return d.values;
     })
     .enter()
     .append("rect")
     .attr("width", x13.rangeBand())
-    .attr("x", function(d) {
+    .attr("x", function (d) {
       return x13(d.rate);
     })
-    .style("fill", function(d) {
+    .style("fill", function (d) {
       return color(d.rate);
     })
-    .attr("y", function(d) {
+    .attr("y", function (d) {
       return y3(0);
     })
-    .attr("height", function(d) {
+    .attr("height", function (d) {
       return height3 - y3(0);
     })
-    .on("mouseover", function(d) {
+    .on("mouseover", function (d) {
       tip3.show(d, this);
       d3.select(this).style("fill", d3.rgb(color(d.rate)).darker(2));
     })
-    .on("mouseout", function(d) {
+    .on("mouseout", function (d) {
       tip3.hide();
       d3.select(this).style("fill", color(d.rate));
     });
@@ -130,14 +130,14 @@ d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
   slice
     .selectAll("rect")
     .transition()
-    .delay(function(d) {
+    .delay(function (d) {
       return Math.random() * 1000;
     })
     .duration(1000)
-    .attr("y", function(d) {
+    .attr("y", function (d) {
       return y3(d.value);
     })
-    .attr("height", function(d) {
+    .attr("height", function (d) {
       return height3 - y3(d.value);
     });
 
@@ -146,7 +146,7 @@ d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
     .selectAll(".legend")
     .data(
       data3[0].values
-        .map(function(d) {
+        .map(function (d) {
           return d.rate;
         })
         .reverse()
@@ -154,7 +154,7 @@ d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
     .enter()
     .append("g")
     .attr("class", "legend")
-    .attr("transform", function(d, i) {
+    .attr("transform", function (d, i) {
       return "translate(0," + i * 20 + ")";
     })
     .style("opacity", "0");
@@ -164,7 +164,7 @@ d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
     .attr("x", width3 - 18)
     .attr("width", 18)
     .attr("height", 18)
-    .style("fill", function(d) {
+    .style("fill", function (d) {
       return color(d);
     });
 
@@ -174,14 +174,14 @@ d3.json("./data/dragonageinquisitionmains.json", function(error, data3) {
     .attr("y", 9)
     .attr("dy", ".35em")
     .style("text-anchor", "end")
-    .text(function(d) {
+    .text(function (d) {
       return d;
     });
 
   legend
     .transition()
     .duration(500)
-    .delay(function(d, i) {
+    .delay(function (d, i) {
       return 1300 + 100 * i;
     })
     .style("opacity", "1");

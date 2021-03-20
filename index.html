@@ -1,151 +1,253 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8" />
-	<link rel="stylesheet" href="styles.css">
+	<meta charset="utf-8">
+	<title>AO3 Statistics</title>
+	<link href="/static/fixed-positioning.css" rel="stylesheet" type="text/css" />
+	<link href="/static/style.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-	<div class="wrapper">
-
-		<header class="header">
-				<h1>Statistics about Dragon Age on AO3</h1>
+	<div id="skrollr-body">
+		<header id="stat-header" data-0="opacity:1;top:0%;">
+			<span id="header-text">
+				<a href="https://twitter.com/LeatsHere" style="float: left; padding: 0 20px;" target="_blank">
+					Questions? Ask me on twitter!
+				</a>
+				Last updated: March 16 2021
+			</span>
 		</header>
-
-		<main class="content">
-			<p>The <a href="https://archiveofourown.org/">"Archive of Our Own" (AO3)</a>, a nonprofit open source repository for
-				fanworks, has become one of the most popular archives for transformative works since its founding in 2008. On this page I have collected several statistics about the fanfictions of the Dragon Age Universe <a href="#dafandom">[1]</a>.This
-				was achieved by going through the tag <a href="https://archiveofourown.org/tags/Dragon%20Age%20-%20All%20Media%20Types/works">"Dragon
-					Age - All Media Types"</a> on
-				AO3. This means that any work not tagged with this was not considered.</p>
-				<i>Last updated on September 19, 2019 2pm MEST</i>
-
-			<div id="toc_container">
-				<strong>Contents</strong>
-				<ul class="toc_list">
-					<li><a href="#TimeOfUpdate">1 Publishing dates</a></li>
-					<li><a href="#Characters">2 Characters</a>
-						<ul>
-							<li><a href="#PopularCharacters">2.1 Most popular Characters</a></li>
-							<li><a href="#MainCharacters">2.2 Types of Main Characters</a></li>
-							<li><a href="#First_Sub_Point_2">2.3 Ships</a></li>
-						</ul>
-					</li>
-					<li><a href="#Ratings">3 Ratings</a>
-					<li><a href="#LengthAndChapters">4 Length and chapters</a></li>
-					</li>
-					<li><a href="#footnotes">5 Footnotes</a></li>
-				</ul>
-			</div>
-			<h2 id="TimeOfUpdate">Publishing dates</h2>
-			<p>
-				Every work on AO3 has a date which describes when the fanfiction was last updated. For single-chapter stories this
-				is usually the same as the post date. For multi-chapter fanfictions the date shows the publishing date of the last chapter.
-				The following graph shows only the dates of <b>completed</b> fanworks, meaning that not yet completed fanworks were
-				ignored. If you hover over the grey lines you can see
-				which event happened at that time to give you more context.<br>
-				<i>Note: All release dates are the US release dates.</i></p>
-
-			<div class="graphs" id="timegraph">
-			</div>
-			<h2 id="Characters">Characters</h2>
-			<p>AO3 allows the authors to tag the characters which appear in their story. They can use what ever tag they like,
-				but
-				the most popular characters usually get suggested once the author starts typing to prevent users from creating
-				several tags for one and the same character. This does not always work, however. A popular example are the tags for
-				Solas from Dragon Age: Inquisition. For him the following tags exist (sorted by popularity with the most popular
-				one
-				coming first): "Solas", "Solas (Dragon Age)", "Fen'Harel | Solas" plus an additional set of tags specifying how
-				Solas behaves in the certain work (for example "dark!Solas").<br>
-				There are authors who will just use one of those tags, while other authors might use more than one tag for the
-				character. Due to that the amount a tag is used does not necessarily equal the amount of fanfictions written about
-				that character. But it does give an estimate for popularity of a character.</p>
-			<h3 id="PopularCharacters">Most popular Characters</h3>
-			<p>
-				In the following graph the character tags used the most are pictured, starting with the most popular on the left.
-				The view is limited to the top 20. However, all in all there were more than 14000 individual character tags available.
+		<div id="introoutro" data-0="opacity:1;" data-500="" data-550="opacity:0;">
+			<h1>Archive of our Own - Haikyuu Fanwork Data Visualisation</h1>
+			<p>The <a href="https://archiveofourown.org/">"Archive of Our Own" (AO3)</a>, a nonprofit open source
+				repository for
+				fanworks, has become one of the most popular archives for transformative works since its founding in
+				2008.
 			</p>
-			<div class="graphs" id="chargraph">
-			</div>
-			<h3 id="MainCharacters">Types of main character in Dragon Age: Inquisition</h3>
 			<p>
-				In Dragon Age: Inquisition the player can choose from four different races for the main character ("The
-				Inquisitor"). These are human (last name <strong>Trevelyan</strong>), elf (last name <strong>Lavellan</strong>),
-				dwarf (last name <strong>Cadash</strong>)
-				and qunari (last name <strong>Adaar</strong>)<a href="#qunari">[2]</a>. In the following graph I chose the most
-				popular set of tags to estimate how many fanfictions there are with the specific races. However, since there are
-				some fanfictions who do use more than one Inquisitor tag these are only estimates. Also, there were over 50
-				different tags for Inquisitors, ranging from only "Inquisitor" up to combinations for gender, race and class. In
-				addition many authors did use the specific first name of the inquisitor, which can be chosen freely.<br>
-				The tags which were chosen to represent were:<br>
+				Haikyuu!! (ハイキュー!!) is a Japanese manga series written and illustrated by Haruichi Furudate.
+				On this page I have collected several statistics about the fanfictions of the Haikyuu!! series. This
+				was achieved by going through the tag <a
+					href="https://archiveofourown.org/tags/Haikyuu!!/works">"Haikyuu!!"</a> on
+				AO3. This means that any work not tagged with this was not considered. Works that are only viewable when
+				logged in are also not considered as they cannot be saved with my script.
 			</p>
-			<pre>
-Female [last name], Male [last name], [last name]
-Female Inquisitor (Dragon Age), Male Inquisitor (Dragon Age), Inquisitor (Dragon Age)</pre>
-			<div class="graphs" id="mainchargraph">
+			<div id="arrow">
+				To explore the visualizations just start scrolling down! :)<br>
+				▼
 			</div>
-			<p><i>Note: Nonbinary/Genderqueer/Agender tags were not included in this graph. While the "Nonbinary Inquisitor" tags exist, 
-					they are not used in a capacity that would make them particularly visible in the graphic.
-					For completion purposes their numbers will be added here:<br>
-					Nonbinary Inquisitor (Dragon Age): 21, Nonbinary Lavellan: 12, Nonbinary Adaar: 6, Nonbinary Trevelyan: 2, Nonbinary Cadash: 0
-				</i></p>
-			<h3 id="Ships">Most popular ship tags</h3>
+		</div>
+		<div id="dates" data-300="top:100%;" data-900="top:40%;" data-6000="display:block;"
+			data-6500="top:-100%;display:none;">
+			<div id="description" data-900="opacity:0;" data-910="opacity:1;top:-40%;left:30%;" data-1390=""
+				data-1400="opacity:0;">
+				This table shows how many works were finished per day. Only complete works are counted this way :)
+			</div>
+			<div class="graphs" id="timegraph"></div>
+			<!-- annotations -->
+			<div id="first issue" data-1400="opacity:0;left:-22%" data-1450="top:-38%;opacity:1;" data-1900=""
+				data-2000="opacity:0.4;">
+				<svg width="45%" height="45%" viewBox="0 0 1800 500" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					xml:space="preserve">
+					<path d="M35,413L43,452L80,418" style="stroke:black;fill:none;stroke-width:4px;" />
+					<path d="M45,450C45,450 68,45 193,22" style="stroke:black;fill:none;stroke-width:4px;" />
+					<text x="125px" y="35px" style="font-size:42px;fill:black;">
+						20 Feb 2012: The first Manga chapter releases
+					</text>
+				</svg>
+			</div>
+			<div id="first season" data-2000="left:-12%;opacity:0;" data-2050="top:-38%;opacity:1;" data-2500=""
+				data-2600="opacity:0.4;">
+				<svg width="45%" height="45%" viewBox="0 0 1800 500" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					xml:space="preserve">
+					<path d="M150,426L208,452L222,407" style="stroke:black;fill:none;stroke-width:4px;" />
+					<path d="M207,447C207,447 -102,120 200,100" style="stroke:black;fill:none;stroke-width:4px;" />
+					<text x="135px" y="110px" style="font-size:42px;fill:black;">
+						06 Apr 2014: Anime Season 1 begins airing
+					</text>
+				</svg>
+			</div>
+			<div id="second season" data-2600="left:0%;opacity:0;" data-2650="top:-30%;opacity:1;" data-3100=""
+				data-3200="opacity:0.4;">
+				<svg width="45%" height="45%" viewBox="0 0 1800 500" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					xml:space="preserve">
+					<path d="M295,381L327,417L283,434" style="stroke:black;fill:none;stroke-width:4px;" />
+					<path d="M326,417C187,414 132,196 236,259C393,353 -174,234 258,137C349,117 360,122 360,122"
+						style="stroke:black;fill:none;stroke-width:4px;" />
+					<text x="292px" y="134px" style="font-size:42px;fill:black;">
+						04 Oct 2015: Anime Season 2 begins airing
+					</text>
+				</svg>
+			</div>
+			<div id="third season" data-3200="right:-17%;opacity:0;" data-3250="top:-30%;opacity:1;" data-3700=""
+				data-3800="opacity:0.4;">
+				<svg width="45%" height="45%" viewBox="0 0 1800 500" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					xml:space="preserve">
+					<path d="M155,372L117,405L159,412" style="stroke:black;fill:none;stroke-width:4px;" />
+					<path d="M121,404C175,395 318,342 308,271" style="stroke:black;fill:none;stroke-width:4px;" />
+					<text x="0px" y="250px" style="font-size:42px;fill:black;">
+						07 Oct 2016: Anime Season 3 begins airing
+					</text>
+				</svg>
+			</div>
+			<div id="fourth 1 season" data-3800="right:-24%;opacity:0;" data-3850="top:-20%;opacity:1;" data-4300=""
+				data-4400="opacity:0.4;">
+				<svg width="45%" height="45%" viewBox="0 0 1800 500" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					xml:space="preserve">
+					<path d="M1079,373L1136,387L1104,406" style="fill:none;stroke:black;stroke-width:4px;" />
+					<path d="M1130,388C1130,388 905,385 840,436" style="fill:none;stroke:black;stroke-width:4px;" />
+					<text x="0px" y="485px" style="font-size:42px;fill:black;">
+						10 Jan 2020: Anime Season 4.1 begins airing
+					</text>
+				</svg>
+			</div>
+			<div id="manga end" data-4400="right:-27.5%;opacity:0;" data-4450="top:-35%;opacity:1;" data-4900=""
+				data-5000="opacity:0.4;">
+				<svg width="45%" height="45%" viewBox="0 0 1800 500" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					xml:space="preserve">
+					<path d="M1207,374L1230,421L1187,422" style="fill:none;stroke:black;stroke-width:4px;" />
+					<path d="M1226,418C1226,418 932,293 895,101" style="fill:none;stroke:black;stroke-width:4px;" />
+					<text x="50px" y="90px" style="font-size:42px;fill:black;">
+						20 Jul 2020: The last Manga chapter releases
+					</text>
+				</svg>
+			</div>
+			<div id="fourth 2 season" data-5000="right:-39%;opacity:0;" data-5050="top:-44%;opacity:1;" data-5500=""
+				data-5600="opacity:0.4;">
+				<svg width="45%" height="45%" viewBox="0 0 1800 500" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					xml:space="preserve">
+					<path d="M823,475L863,500L883,459" style="fill:none;stroke:black;stroke-width:4px;" />
+					<path d="M863,500C853,439 781,170 719,303C672,403 1022,214 681,61"
+						style="fill:none;stroke:black;stroke-width:4px;" />
+					<text x="0px" y="40px" style="font-size:42px;fill:black;">
+						02 Oct 2020: Anime Season 4.2 begins airing
+					</text>
+				</svg>
+			</div>
+			<div id="valentine" data-0="right:-50.5%;bottom:-40%;">
+				<svg width="50%" height="50%" viewBox="0 0 1800 900" version="1.1" xmlns="http://www.w3.org/2000/svg"
+					xml:space="preserve">
+					<g transform="matrix(1,0,0,1,-959,-87)">
+						<path d="M1610,89L1570,101L1581,145" style="fill:none;stroke:black;stroke-width:5px;"
+							data-5600="opacity:0;" data-5610="opacity:1;" />
+						<path
+							d="M1570,102C1570,102 1882,330 1708,438C1561,528 1745,543 1646,612C1396,787 1004,813 961,816"
+							style="fill:none;stroke:black;stroke-width:5px;stroke-dasharray:6000;"
+							data-5610="stroke-dashoffset:6000;" data-6000="stroke-dashoffset:0;" />
+					</g>
+				</svg>
+			</div>
+			<div data-5750="opacity:0;left:44%;bottom:-22%;" data-5800="opacity:1;">
+				The most works were updated on Valentine's Day 2021!<br>
+				(324 works!!)
+			</div>
+		</div>
+		<!-- characters -->
+		<div id="chars" data-6200="top:100%;left:5%;" data-6400="top:40%;" data-6800="display:block;"
+			data-7000="top:-100%;display:none;">
+			<div class="graphs" id="chargraph"></div>
+			<div id="description" data-6320="right:10%;top:-10%;opacity:0;" data-6360="opacity:1;">
+				This graph shows how many works exist with certain characters. Hover over the bars to check the exact
+				number!
+			</div>
+		</div>
+		<!-- ships -->
+		<div id="ships" data-6900="top:100%;left:5%;" data-7100="top:40%;" data-7500="display:block;"
+			data-7700="top:-100%;display:none;">
+			<div class="graphs" id="shipgraph"></div>
+			<div id="description" data-7020="right:10%;top:-10%;opacity:0;" data-7070="opacity:1;">
+				This graph shows how many works exist with certain relationships. Hover over the bars to check the exact
+				number!
+			</div>
+		</div>
+		<div id="shipcomparison" data-7600="top:100%;" data-7800="top:40%;" data-8200="display:block;"
+			data-8400="top:-100%;display:none;">
+			<div id="description" data-7720="left:10%;top:-45%;opacity:0;" data-7770="opacity:1;">
+				This graph shows how many fanfictions were written per month about certain ships. The last counted month
+				was February 2021 so it's only full months displayed. Only completed works were counted in this graph.
+			</div>
+			<svg width="70%" height="70%" viewBox="0 0 360 278" version="1.1" xmlns="http://www.w3.org/2000/svg"
+				xml:space="preserve" data-0="right:0%;top:-15%;opacity:0" data-7770="" data-7790="opacity:1;">
+				<circle cx="50" cy="50" r="20" style="fill:rgb(206,114,53);" />
+				<circle cx="50" cy="100" r="20" style="fill:rgb(124,217,222);" />
+				<circle cx="50" cy="150" r="20" style="fill:rgb(89,89,78);" />
+				<text x="85px" y="55px">Hinata Shouyou / Kageyama Tobio</text>
+				<text x="85px" y="105px">Iwaizumi Hajime / Oikawa Tooru</text>
+				<text x="85px" y="155px">Miya Atsumu / Sakusa Kiyoomi</text>
+			</svg>
+			<div class="graphs" id="shipcomparisongraph"></div>
+		</div>
+		<!-- tags -->
+		<div id="tags" data-8400="top:100%;" data-8600="top:40%;" data-9000="display:block;"
+			data-9100="top:-100%;display:none;">
+			<div id="description" data-8620="right:10%;top:-10%;opacity:0;" data-8670="opacity:1;">
+				This graph shows how many works exist with certain tags. Hover over the bars to check the exact
+				number!
+			</div>
+			<div class="graphs" id="taggraph"></div>
+		</div>
+		<!-- end :) -->
+		<div id="introoutro" data-9000="top:100%" data-9200="top:40%" data-9600="display:block;">
 			<p>
-				In addition to characters AO3 also lets the author tag relationships (usually just called "ships") which appear in
-				their story. These are usually
-				in the format "[first character] / [second character]". While most tagged relationships are of romantic or sexual
-				nature it is also possible to tag friendships, which is usually done in the format "[first character] & [second
-				character]". In the following graph the most popular ship tags are shown.
-			</p>
-			<div class="graphs" id="shipgraph">
-			</div>
-			<h2 id="Ratings">Ratings</h2>
+				You have reached the end! Thank you very much for looking through this. I really enjoy making
+				visualizations
+				so there might come a few more in the future. I have a full database with statistics about Haikyuu
+				works.
+				And there are a lot of interesting things I could make graphics with.</p>
 			<p>
-				The author can choose one of several ratings depending on the content of their work. The following graph shows the
-				distribution of these ratings.
+				If you have anything specific you are curious about why don't you head over to <a
+					href="https://twitter.com/LeatsHere" target="_blank">twitter</a> and ask me? :)
 			</p>
-			<div class="graphs" id="ratingsgraph">
+			<div id="introoutro">
+				<h4>Some more technical details:</h4>
+				<b>Used JavaScript libraries:</b> <a href="https://github.com/Prinzhorn/skrollr"
+					target="_blank">skrollr</a>
+				and <a href="https://d3js.org/" target="_blank">D3</a><br />
+				I used python and postgresql for scraping AO3 and the creation of the database.<br />
+				This project of mine is already a few years old but I recently remade some parts of it.<br />
+				Visit the <a href="https://github.com/Leats/AO3FanworkStatistics">github project page</a> for the code
+				:)
 			</div>
-			<h2 id="LengthAndChapters">Length and chapters</h2>
-			<p>
-				AO3 gives the authors the ability to upload their works in chapters. While many users use this function there are a
-				number of authors who upload their whole work in one chapter. While the shorted uploaded work has 0 words, the
-				longest one has currently 996176 words (19 Sep 2019). A lot of works with 0 words are not written ones but instead
-				contain fanart which is not counted in the word count. In addition to this works can also be marked as "completed",
-				signaling the user that the story is completely finished.<br>
-				Looking at the distribution of work length one sees that a large percentage of works has a word count of 90000 and
-				under (~98.1%). Due to that I will only work with these in the following.
-				For the graph I sorted the works under 90000 words into 50 equally sized bins.
-				The dots do show how many chapters the works in these buckets have in average. By clicking on the button the dots
-				change to display how many of these works are marked as "completed". Hovering over the dots at any time shows a
-				tooltip with the statistics for each bin.
-			</p>
-			<div class="graphs" id="lengthgraph">
-			</div>
-
-
-		</main>
-
-		<footer class="footer">
-			<strong>Footnotes:</strong><br>
-			<p id="dafandom">[1] This does contain all media, which is set in the Dragon Age Universe. While it is mostly about
-				the three primary games, also books, comics and movies are part of it. For a full list of media see <a href="https://en.wikipedia.org/wiki/Dragon_Age">wikipedia's
-					entry on this.</a></p>
-			<p id="qunari">[2] Qunari are a fictional race of tall people with horns, who have usually grey-ish skin. They are
-				unique to the Dragon Age Universe. Technically,
-				it is not the race that is called Qunari but the "religion" they have. There is no true name for the race itself,
-				but most often if someone says Qunari they do mean the race, nevertheless.</a></p>
-		</footer>
-
+		</div>
+		<div id="funstats" data-9100="top:100%;transform:rotate(-10deg);left:0%;" data-9200="top:15%">
+			<h4>Fun statistics:</h4>
+			600,121,491 words total<br />
+			17,407,106 kudos total<br />
+			2,193,981 bookmarks total<br />
+			217,379,622 hits total
+		</div>
+		<div id="funstats" data-9100="top:100%;transform:rotate(10deg);" data-9200="top:15%;right:0%">
+			<h4>More fun statistics:</h4>
+			The most common title is "Home" with 65 works!<br />
+			Works with 0 and with 1000 words are the most common ones!<br />
+			The author with most Haikyuu!! fanworks on AO3 seems to be <a
+				href="https://archiveofourown.org/users/karasunovolleygays/pseuds/karasunovolleygays/works?fandom_id=758208"
+				target="_blank">karasunovolleygays</a>!<br />
+			<i>note: this might not be accurate as my data is only counting works that are available while not
+				logged in</i>
+		</div>
 	</div>
+
+	<script src="./scripts/skrollr.js"></script>
 	<script src="//d3js.org/d3.v3.min.js"></script>
 	<script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+	<script type="text/javascript">
+		var s = skrollr.init({
+			edgeStrategy: 'set',
+			easing: {
+				WTF: Math.random,
+				inverted: function (p) {
+					return 1 - p;
+				}
+			}
+		});
+	</script>
 	<script src="./components/timegraph.js"></script>
 	<script src="./components/charchart.js"></script>
-	<script src="./components/mainchars.js"></script>
 	<script src="./components/shipchart.js"></script>
-	<script src="./components/ratingschart.js"></script>
-	<script src="./components/lengthandchapters.js"></script>
+	<script src="./components/shippingovertime.js"></script>
+	<script src="./components/tagchart.js"></script>
 </body>
 
 </html>
