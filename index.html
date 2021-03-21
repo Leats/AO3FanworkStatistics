@@ -39,6 +39,9 @@
 				▼
 			</div>
 		</div>
+		<!-- when the page has not yet loaded fully the svg graphics from below appear on screen
+		this div here fixes that -->
+		<div style="background: white;height:700px;"></div>
 		<!-- dates -->
 		<div id="dates" data-300="top:100%;" data-900="top:20%;" data-6000="display:block;"
 			data-6500="top:-100%;display:none;">
@@ -238,7 +241,7 @@
 	<script src="//d3js.org/d3.v3.min.js"></script>
 	<script src="//labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 	<script type="text/javascript">
-		var s = skrollr.init({
+		const s = skrollr.init({
 			edgeStrategy: 'set',
 			easing: {
 				WTF: Math.random,
