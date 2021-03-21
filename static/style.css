@@ -59,7 +59,7 @@ a {
     margin: auto;
 }
 
-#dates, #shipcomparison, #tags {
+#dates, #shipcomparison, #tags, #chars, #ships, #annotations {
     width: 100%;
     text-align: center;
 }

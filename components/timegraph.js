@@ -30,13 +30,9 @@ const line = d3.svg
     return y(d.value);
   });
 
-const svgTime = d3
-  .select("#timegraph")
-  .append("svg")
-  .attr("width", width + margin.left + margin.right)
-  .attr("height", height + margin.top + margin.bottom)
+const svgTime = d3.select("#timesvg")
   .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+  .attr("transform", "translate(" + 150 + "," + 270 + ")");
 
 d3.json("./data/haikyuu/ficdates.json", function (error, data) {
   if (error) throw error;
