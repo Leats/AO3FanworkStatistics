@@ -8,6 +8,7 @@ Back in 2018 this was also the first time I worked with d3 to create data graphi
 In 2021 I redid parts of the visualizations.
 
 **The result can be seen [here](https://leats.github.io/AO3FanworkStatistics/).**
+⚠️ This page is sadly not mobile friendly :(
 
 **Limitations: Only fanworks visible for everyone are counted in these statistics. Works where one has to be logged in were ignored.**
 
